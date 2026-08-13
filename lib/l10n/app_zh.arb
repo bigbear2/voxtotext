@@ -40,6 +40,8 @@
   "settingsThemeSystem": "系统",
   "settingsThemeLight": "浅色",
   "settingsThemeDark": "深色",
+  "settingsRepoTitle": "项目仓库",
+  "settingsRepoSub": "在 GitHub 上查看源代码",
   "settingsTranscriptionLangTitle": "转录语言",
   "settingsSectionBehavior": "行为",
   "settingsPlayAudioTitle": "转录时播放音频",

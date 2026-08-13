@@ -40,6 +40,8 @@
   "settingsThemeSystem": "Sistem",
   "settingsThemeLight": "Terang",
   "settingsThemeDark": "Gelap",
+  "settingsRepoTitle": "Repositori proyek",
+  "settingsRepoSub": "Lihat kode sumber di GitHub",
   "settingsTranscriptionLangTitle": "Bahasa transkripsi",
   "settingsSectionBehavior": "Perilaku",
   "settingsPlayAudioTitle": "Putar audio selama transkripsi",

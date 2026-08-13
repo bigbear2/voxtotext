@@ -40,6 +40,8 @@
   "settingsThemeSystem": "النظام",
   "settingsThemeLight": "فاتح",
   "settingsThemeDark": "داكن",
+  "settingsRepoTitle": "مستودع المشروع",
+  "settingsRepoSub": "عرض الكود المصدري على GitHub",
   "settingsTranscriptionLangTitle": "لغة النسخ",
   "settingsSectionBehavior": "السلوك",
   "settingsPlayAudioTitle": "تشغيل الصوت أثناء النسخ",

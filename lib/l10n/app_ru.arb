@@ -40,6 +40,8 @@
   "settingsThemeSystem": "Система",
   "settingsThemeLight": "Светлая",
   "settingsThemeDark": "Тёмная",
+  "settingsRepoTitle": "Репозиторий проекта",
+  "settingsRepoSub": "Посмотреть исходный код на GitHub",
   "settingsTranscriptionLangTitle": "Язык распознавания",
   "settingsSectionBehavior": "Поведение",
   "settingsPlayAudioTitle": "Воспроизводить аудио во время распознавания",

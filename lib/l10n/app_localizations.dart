@@ -352,6 +352,18 @@ abstract class AppLocalizations {
   /// **'Dark'**
   String get settingsThemeDark;
 
+  /// Settings tile opening the GitHub repository
+  ///
+  /// In en, this message translates to:
+  /// **'Project repository'**
+  String get settingsRepoTitle;
+
+  /// Subtitle of the repository settings tile
+  ///
+  /// In en, this message translates to:
+  /// **'View the source code on GitHub'**
+  String get settingsRepoSub;
+
   /// Label of the transcription language dropdown
   ///
   /// In en, this message translates to:

@@ -40,6 +40,8 @@
   "settingsThemeSystem": "Système",
   "settingsThemeLight": "Clair",
   "settingsThemeDark": "Sombre",
+  "settingsRepoTitle": "Dépôt du projet",
+  "settingsRepoSub": "Voir le code source sur GitHub",
   "settingsTranscriptionLangTitle": "Langue de transcription",
   "settingsSectionBehavior": "Comportement",
   "settingsPlayAudioTitle": "Lire l'audio pendant la transcription",

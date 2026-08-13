@@ -39,6 +39,8 @@
   "settingsThemeSystem": "System",
   "settingsThemeLight": "Hell",
   "settingsThemeDark": "Dunkel",
+  "settingsRepoTitle": "Projekt-Repository",
+  "settingsRepoSub": "Quellcode auf GitHub ansehen",
   "settingsTranscriptionLangTitle": "Transkriptionssprache",
   "settingsSectionBehavior": "Verhalten",
   "settingsPlayAudioTitle": "Audio während der Transkription abspielen",

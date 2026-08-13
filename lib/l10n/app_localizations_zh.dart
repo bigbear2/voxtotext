@@ -134,6 +134,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsThemeDark => '深色';
 
   @override
+  String get settingsRepoTitle => '项目仓库';
+
+  @override
+  String get settingsRepoSub => '在 GitHub 上查看源代码';
+
+  @override
   String get settingsTranscriptionLangTitle => '转录语言';
 
   @override

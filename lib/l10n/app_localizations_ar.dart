@@ -136,6 +136,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsThemeDark => 'داكن';
 
   @override
+  String get settingsRepoTitle => 'مستودع المشروع';
+
+  @override
+  String get settingsRepoSub => 'عرض الكود المصدري على GitHub';
+
+  @override
   String get settingsTranscriptionLangTitle => 'لغة النسخ';
 
   @override

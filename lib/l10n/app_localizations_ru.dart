@@ -136,6 +136,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsThemeDark => 'Тёмная';
 
   @override
+  String get settingsRepoTitle => 'Репозиторий проекта';
+
+  @override
+  String get settingsRepoSub => 'Посмотреть исходный код на GitHub';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Язык распознавания';
 
   @override

@@ -36,7 +36,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _openGroqKeys() async {
-    const url = 'https://console.groq.com/keys';
+    await _openExternalUrl('https://console.groq.com/keys');
+  }
+
+  Future<void> _openRepo() async {
+    await _openExternalUrl('https://github.com/bigbear2/voxtotext');
+  }
+
+  Future<void> _openExternalUrl(String url) async {
     final ok = await launchUrl(
       Uri.parse(url),
       mode: LaunchMode.externalApplication,
@@ -158,8 +165,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }),
                 ],
                 onChanged: (v) {
-                  if (v != null) settings.setPrefLanguage(v);
+                  if (v != null) settings.setThemeMode(v);
                 },
+              ),
+              Card(
+                margin: const EdgeInsets.only(bottom: 12),
+                child: ListTile(
+                  leading: const Icon(Icons.code),
+                  title: Text(l10n.settingsRepoTitle),
+                  subtitle: Text(l10n.settingsRepoSub),
+                  trailing: const Icon(Icons.open_in_new),
+                  onTap: _openRepo,
+                ),
               ),
               const SizedBox(height: 24),
 

@@ -137,6 +137,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsThemeDark => 'गहरा';
 
   @override
+  String get settingsRepoTitle => 'प्रोजेक्ट रिपॉज़िटरी';
+
+  @override
+  String get settingsRepoSub => 'GitHub पर सोर्स कोड देखें';
+
+  @override
   String get settingsTranscriptionLangTitle => 'ट्रांसक्रिप्शन भाषा';
 
   @override

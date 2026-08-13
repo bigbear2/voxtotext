@@ -138,6 +138,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsThemeDark => 'Sombre';
 
   @override
+  String get settingsRepoTitle => 'Dépôt du projet';
+
+  @override
+  String get settingsRepoSub => 'Voir le code source sur GitHub';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Langue de transcription';
 
   @override

@@ -40,6 +40,8 @@
   "settingsThemeSystem": "Sistem",
   "settingsThemeLight": "Açık",
   "settingsThemeDark": "Koyu",
+  "settingsRepoTitle": "Proje deposu",
+  "settingsRepoSub": "Kaynak kodu GitHub'da görüntüle",
   "settingsTranscriptionLangTitle": "Dönüştürme dili",
   "settingsSectionBehavior": "Davranış",
   "settingsPlayAudioTitle": "Dönüştürme sırasında sesi çal",

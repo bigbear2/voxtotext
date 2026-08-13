@@ -137,6 +137,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsThemeDark => 'Gelap';
 
   @override
+  String get settingsRepoTitle => 'Repositori proyek';
+
+  @override
+  String get settingsRepoSub => 'Lihat kode sumber di GitHub';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Bahasa transkripsi';
 
   @override

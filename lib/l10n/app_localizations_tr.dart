@@ -136,6 +136,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsThemeDark => 'Koyu';
 
   @override
+  String get settingsRepoTitle => 'Proje deposu';
+
+  @override
+  String get settingsRepoSub => 'Kaynak kodu GitHub\'da görüntüle';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Dönüştürme dili';
 
   @override
