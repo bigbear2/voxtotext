@@ -15,6 +15,7 @@ import 'l10n_ext.dart';
 import 'languages.dart';
 import 'settings_screen.dart';
 import 'settings_service.dart';
+import 'whisper_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -276,53 +277,40 @@ class _HomeScreenState extends State<HomeScreen> {
       // Prepara il player audio
       await _setupAndPlayAudio(cleanPath);
 
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('https://api.groq.com/openai/v1/audio/transcriptions'),
+      final String lang = _whisperLangCode(
+        SettingsService.instance.prefLanguage,
       );
+      final String text = SettingsService.instance.useLocal
+          ? await _transcribeLocal(cleanPath, lang, l10n)
+          : await _transcribeGroq(cleanPath, l10n);
 
-      request.headers['Authorization'] =
-          'Bearer ${SettingsService.instance.apiKey}';
-      request.fields['model'] = 'whisper-large-v3';
-      request.fields['response_format'] = 'json';
-
-      if (SettingsService.instance.prefLanguage != "auto") {
-        request.fields['language'] = SettingsService.instance.prefLanguage;
+      if (text.isEmpty) {
+        setState(() {
+          _isLoading = false;
+          _statusMessage = l10n.noTextExtracted;
+        });
+        return;
       }
 
-      request.files.add(await http.MultipartFile.fromPath('file', file.path));
+      setState(() {
+        _transcription = text;
+        _statusMessage = l10n.transcriptionCompleted;
+      });
 
-      var streamedResponse = await request.send();
-      var response = await http.Response.fromStream(streamedResponse);
+      // Salvataggio in SQLite (se abilitato nelle Impostazioni)
+      if (SettingsService.instance.saveHistory) {
+        final now = DateTime.now();
+        String formattedDate =
+            "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}";
 
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        String extractedText = data['text'] ?? l10n.noTextExtracted;
-
-        setState(() {
-          _transcription = extractedText;
-          _statusMessage = l10n.transcriptionCompleted;
-        });
-
-        // Salvataggio in SQLite (se abilitato nelle Impostazioni)
-        if (SettingsService.instance.saveHistory) {
-          final now = DateTime.now();
-          String formattedDate =
-              "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}";
-
-          await DBHelper.insert(
-            TranscriptionItem(
-              text: extractedText,
-              date: formattedDate,
-              audioPath: cleanPath,
-              language: SettingsService.instance.prefLanguage,
-            ),
-          );
-        }
-      } else {
-        setState(() {
-          _statusMessage = l10n.errorApi(response.statusCode, response.body);
-        });
+        await DBHelper.insert(
+          TranscriptionItem(
+            text: text,
+            date: formattedDate,
+            audioPath: cleanPath,
+            language: SettingsService.instance.prefLanguage,
+          ),
+        );
       }
     } catch (e) {
       setState(() {
@@ -332,6 +320,86 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  /// Mappa il codice lingua delle Impostazioni sul codice usato da whisper:
+  /// 'auto' → stringa vuota (whisper.cpp rileva da solo), altrimenti il codice.
+  String _whisperLangCode(String pref) => pref == 'auto' ? '' : pref;
+
+  /// Trascrizione locale (whisper.cpp on-device). Scarica il modello la prima
+  /// volta, poi trascrive con FFmpeg integrato.
+  Future<String> _transcribeLocal(
+    String path,
+    String lang,
+    AppLocalizations l10n,
+  ) async {
+    setState(() {
+      _isLoading = true;
+      _statusMessage = l10n.statusProcessingLocal;
+    });
+
+    if (!await WhisperService.instance.isModelDownloaded()) {
+      setState(() {
+        _statusMessage = l10n.statusDownloadingModel(0);
+      });
+      await WhisperService.instance.downloadModel(
+        onProgress: (percent) {
+          if (!mounted) return;
+          setState(() => _statusMessage = l10n.statusDownloadingModel(percent));
+        },
+      );
+    }
+
+    final String? result = await WhisperService.instance.transcribe(
+      path,
+      lang: lang,
+      onProgress: (percent) {
+        if (!mounted) return;
+        setState(() => _statusMessage = l10n.statusProcessingLocal);
+      },
+    );
+    if (result == null) {
+      setState(() {
+        _isLoading = false;
+        _statusMessage = l10n.errorFileNotFound;
+      });
+    }
+    return result ?? '';
+  }
+
+  /// Trascrizione cloud con Groq (Endpoint OpenAI /audio/transcriptions).
+  Future<String> _transcribeGroq(
+    String cleanPath,
+    AppLocalizations l10n,
+  ) async {
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('https://api.groq.com/openai/v1/audio/transcriptions'),
+    );
+
+    request.headers['Authorization'] =
+        'Bearer ${SettingsService.instance.apiKey}';
+    request.fields['model'] = 'whisper-large-v3';
+    request.fields['response_format'] = 'json';
+
+    if (SettingsService.instance.prefLanguage != "auto") {
+      request.fields['language'] = SettingsService.instance.prefLanguage;
+    }
+
+    request.files.add(await http.MultipartFile.fromPath('file', cleanPath));
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      return data['text'] ?? '';
+    } else {
+      setState(() {
+        _statusMessage = l10n.errorApi(response.statusCode, response.body);
+      });
+      return '';
     }
   }
 

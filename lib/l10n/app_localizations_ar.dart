@@ -31,6 +31,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get statusProcessing => 'جارٍ معالجة رسالة صوتية مع Groq...';
 
   @override
+  String get statusProcessingLocal => 'جارٍ النسخ محليًا على الجهاز...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return 'جارٍ تنزيل النموذج... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => 'اكتمل النسخ!';
 
   @override
@@ -100,6 +108,42 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'النسخ باستخدام Groq';
+
+  @override
+  String get settingsSectionEngine => 'محرك النسخ';
+
+  @override
+  String get settingsEngineTitle => 'محرك النسخ';
+
+  @override
+  String get settingsEngineLocal => 'محلي (بدون اتصال)';
+
+  @override
+  String get settingsEngineGroq => 'Groq (سحابة)';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return 'النموذج المحلي ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => 'مثبت';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return 'غير مثبت ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => 'تنزيل النموذج';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return 'جارٍ التنزيل... $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => 'تم تنزيل النموذج';
 
   @override
   String get settingsApiKeyTitle => 'مفتاح API لـ Groq';

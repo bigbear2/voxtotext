@@ -5,6 +5,7 @@ import 'l10n/app_localizations.dart';
 import 'l10n_ext.dart';
 import 'languages.dart';
 import 'settings_service.dart';
+import 'whisper_service.dart';
 
 /// Schermata Impostazioni.
 ///
@@ -23,10 +24,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final TextEditingController _apiKeyController = TextEditingController();
   bool _obscureKey = true;
 
+  bool _modelDownloading = false;
+  int _downloadProgress = 0;
+  bool _modelDownloaded = false;
+
   @override
   void initState() {
     super.initState();
     _apiKeyController.text = SettingsService.instance.apiKey;
+    _refreshModelStatus();
+  }
+
+  Future<void> _refreshModelStatus() async {
+    final downloaded = await WhisperService.instance.isModelDownloaded();
+    if (!mounted) return;
+    setState(() => _modelDownloaded = downloaded);
+  }
+
+  Future<void> _downloadModel() async {
+    final l10n = context.l10n;
+    setState(() {
+      _modelDownloading = true;
+      _downloadProgress = 0;
+    });
+    try {
+      await WhisperService.instance.downloadModel(
+        onProgress: (percent) {
+          if (!mounted) return;
+          setState(() => _downloadProgress = percent);
+        },
+      );
+      if (!mounted) return;
+      setState(() {
+        _modelDownloading = false;
+        _modelDownloaded = true;
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.settingsModelDownloadedOk)));
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _modelDownloading = false);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Download errore: $e')));
+    }
   }
 
   @override
@@ -116,6 +158,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 24),
 
+              // ── MOTORE DI TRASCRIZIONE ──
+              _sectionHeader(l10n.settingsSectionEngine),
+              _dropdownTile<String>(
+                label: l10n.settingsEngineTitle,
+                value: settings.engine,
+                items: [
+                  DropdownMenuItem(
+                    value: SettingsService.engineLocal,
+                    child: Text(l10n.settingsEngineLocal),
+                  ),
+                  DropdownMenuItem(
+                    value: SettingsService.engineGroq,
+                    child: Text(l10n.settingsEngineGroq),
+                  ),
+                ],
+                onChanged: (v) {
+                  if (v != null) settings.setEngine(v);
+                },
+              ),
+              if (settings.useLocal) _modelTile(l10n),
+              const SizedBox(height: 24),
+
               // ── GENERALE ──
               _sectionHeader(l10n.settingsSectionGeneral),
               _dropdownTile<String>(
@@ -165,7 +229,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }),
                 ],
                 onChanged: (v) {
-                  if (v != null) settings.setThemeMode(v);
+                  if (v != null) settings.setPrefLanguage(v);
                 },
               ),
               Card(
@@ -197,6 +261,65 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _modelTile(AppLocalizations l10n) {
+    final showProgress =
+        _modelDownloading || (_downloadProgress > 0 && !_modelDownloaded);
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  _modelDownloaded
+                      ? Icons.check_circle
+                      : Icons.download_for_offline,
+                  color: _modelDownloaded
+                      ? Colors.green
+                      : Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _modelDownloaded
+                      ? Text(l10n.settingsModelDownloaded)
+                      : Text(
+                          l10n.settingsModelNotDownloaded(
+                            WhisperService.instance.modelSizeLabel,
+                          ),
+                        ),
+                ),
+                if (_modelDownloaded)
+                  const Icon(Icons.cloud_done, color: Colors.green),
+              ],
+            ),
+            if (showProgress) ...[
+              const SizedBox(height: 12),
+              LinearProgressIndicator(value: _downloadProgress / 100),
+              const SizedBox(height: 4),
+              Text(
+                _modelDownloading
+                    ? l10n.settingsModelDownloading(_downloadProgress)
+                    : '$_downloadProgress%',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+            if (!_modelDownloaded) ...[
+              const SizedBox(height: 12),
+              FilledButton.icon(
+                onPressed: _modelDownloading ? null : _downloadModel,
+                icon: const Icon(Icons.download),
+                label: Text(l10n.settingsModelDownload),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

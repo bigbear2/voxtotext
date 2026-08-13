@@ -19,6 +19,11 @@ class SettingsService extends ChangeNotifier {
   static const _kThemeMode = 'theme_mode';
   static const _kPlayAudio = 'play_audio';
   static const _kSaveHistory = 'save_history';
+  static const _kEngine = 'engine';
+
+  /// Motore di trascrizione: 'local' (whisper.cpp on-device) o 'groq' (cloud).
+  static const String engineLocal = 'local';
+  static const String engineGroq = 'groq';
 
   late SharedPreferences _prefs;
 
@@ -28,6 +33,7 @@ class SettingsService extends ChangeNotifier {
   String _themeMode = 'system'; // 'system' | 'light' | 'dark'
   bool _playAudio = true;
   bool _saveHistory = true;
+  String _engine = engineLocal; // default: locale (offline, senza chiave)
 
   bool _loaded = false;
 
@@ -41,6 +47,7 @@ class SettingsService extends ChangeNotifier {
     _themeMode = _prefs.getString(_kThemeMode) ?? 'system';
     _playAudio = _prefs.getBool(_kPlayAudio) ?? true;
     _saveHistory = _prefs.getBool(_kSaveHistory) ?? true;
+    _engine = _prefs.getString(_kEngine) ?? engineLocal;
     _loaded = true;
     notifyListeners();
   }
@@ -51,6 +58,9 @@ class SettingsService extends ChangeNotifier {
   String get themeMode => _themeMode;
   bool get playAudio => _playAudio;
   bool get saveHistory => _saveHistory;
+  String get engine => _engine;
+
+  bool get useLocal => _engine == engineLocal;
 
   Future<void> setApiKey(String value) async {
     _apiKey = value.trim();
@@ -85,6 +95,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setSaveHistory(bool value) async {
     _saveHistory = value;
     await _prefs.setBool(_kSaveHistory, value);
+    notifyListeners();
+  }
+
+  Future<void> setEngine(String value) async {
+    _engine = value;
+    await _prefs.setString(_kEngine, value);
     notifyListeners();
   }
 }

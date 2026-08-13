@@ -31,6 +31,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get statusProcessing => 'Procesando nota de voz con Groq...';
 
   @override
+  String get statusProcessingLocal =>
+      'Transcribiendo localmente en el dispositivo...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return 'Descargando modelo... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => '¡Transcripción completada!';
 
   @override
@@ -102,6 +111,42 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'Transcripción Groq';
+
+  @override
+  String get settingsSectionEngine => 'Motor de transcripción';
+
+  @override
+  String get settingsEngineTitle => 'Motor de transcripción';
+
+  @override
+  String get settingsEngineLocal => 'Local (sin conexión)';
+
+  @override
+  String get settingsEngineGroq => 'Groq (nube)';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return 'Modelo local ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => 'Instalado';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return 'No instalado ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => 'Descargar modelo';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return 'Descargando… $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => 'Modelo descargado';
 
   @override
   String get settingsApiKeyTitle => 'Clave de API de Groq';

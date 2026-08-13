@@ -31,6 +31,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get statusProcessing => 'Sprachnachricht mit Groq wird verarbeitet...';
 
   @override
+  String get statusProcessingLocal =>
+      'Sprachnachricht wird lokal auf dem Gerät verarbeitet...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return 'Modell wird heruntergeladen... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => 'Transkription abgeschlossen!';
 
   @override
@@ -102,6 +111,42 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'Groq-Transkription';
+
+  @override
+  String get settingsSectionEngine => 'Transkriptions-Engine';
+
+  @override
+  String get settingsEngineTitle => 'Transkriptions-Engine';
+
+  @override
+  String get settingsEngineLocal => 'Lokal (offline)';
+
+  @override
+  String get settingsEngineGroq => 'Groq (Cloud)';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return 'Lokales Modell ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => 'Installiert';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return 'Nicht installiert ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => 'Modell herunterladen';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return 'Wird heruntergeladen… $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => 'Modell heruntergeladen';
 
   @override
   String get settingsApiKeyTitle => 'Groq-API-Schlüssel';

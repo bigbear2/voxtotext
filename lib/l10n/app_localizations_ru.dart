@@ -31,6 +31,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get statusProcessing => 'Обработка голосового сообщения с Groq...';
 
   @override
+  String get statusProcessingLocal => 'Транскрибация локально на устройстве...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return 'Загрузка модели... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => 'Расшифровка завершена!';
 
   @override
@@ -100,6 +108,42 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'Распознавание Groq';
+
+  @override
+  String get settingsSectionEngine => 'Движок транскрибации';
+
+  @override
+  String get settingsEngineTitle => 'Движок транскрибации';
+
+  @override
+  String get settingsEngineLocal => 'Локально (офлайн)';
+
+  @override
+  String get settingsEngineGroq => 'Groq (облако)';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return 'Локальная модель ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => 'Установлен';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return 'Не установлен ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => 'Скачать модель';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return 'Загрузка… $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => 'Модель загружена';
 
   @override
   String get settingsApiKeyTitle => 'API-ключ Groq';

@@ -160,6 +160,18 @@ abstract class AppLocalizations {
   /// **'Processing voice note with Groq...'**
   String get statusProcessing;
 
+  /// Status shown while transcribing with the local whisper engine
+  ///
+  /// In en, this message translates to:
+  /// **'Transcribing locally on the device...'**
+  String get statusProcessingLocal;
+
+  /// Status while downloading the local model
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading model... {percent}%'**
+  String statusDownloadingModel(int percent);
+
   /// Status shown after a successful transcription
   ///
   /// In en, this message translates to:
@@ -285,6 +297,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Groq Transcription'**
   String get settingsSectionApi;
+
+  /// Section header for choosing the transcription engine
+  ///
+  /// In en, this message translates to:
+  /// **'Transcription Engine'**
+  String get settingsSectionEngine;
+
+  /// Label of the engine dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Transcription engine'**
+  String get settingsEngineTitle;
+
+  /// On-device whisper engine option
+  ///
+  /// In en, this message translates to:
+  /// **'Local (offline)'**
+  String get settingsEngineLocal;
+
+  /// Cloud Groq API option
+  ///
+  /// In en, this message translates to:
+  /// **'Groq (cloud)'**
+  String get settingsEngineGroq;
+
+  /// Tile title showing the local model status
+  ///
+  /// In en, this message translates to:
+  /// **'Local model ({size})'**
+  String settingsModelDownloadTitle(String size);
+
+  /// Status when the model is already downloaded
+  ///
+  /// In en, this message translates to:
+  /// **'Installed'**
+  String get settingsModelDownloaded;
+
+  /// Status when the model still needs to be downloaded
+  ///
+  /// In en, this message translates to:
+  /// **'Not installed ({size})'**
+  String settingsModelNotDownloaded(String size);
+
+  /// Button to download the local model
+  ///
+  /// In en, this message translates to:
+  /// **'Download model'**
+  String get settingsModelDownload;
+
+  /// Button text while the model downloads
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading… {percent}%'**
+  String settingsModelDownloading(int percent);
+
+  /// Snackbar after successful download
+  ///
+  /// In en, this message translates to:
+  /// **'Model downloaded'**
+  String get settingsModelDownloadedOk;
 
   /// Label of the API key field
   ///

@@ -32,6 +32,15 @@ class AppLocalizationsHi extends AppLocalizations {
       'Groq के साथ वॉइस नोट संसाधित किया जा रहा है...';
 
   @override
+  String get statusProcessingLocal =>
+      'डिवाइस पर स्थानीय रूप से ट्रांसक्राइब हो रहा है...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return 'मॉडल डाउनलोड हो रहा है... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => 'लिप्यंतरण पूर्ण!';
 
   @override
@@ -101,6 +110,42 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'Groq ट्रांसक्रिप्शन';
+
+  @override
+  String get settingsSectionEngine => 'ट्रांसक्रिप्शन इंजन';
+
+  @override
+  String get settingsEngineTitle => 'ट्रांसक्रिप्शन इंजन';
+
+  @override
+  String get settingsEngineLocal => 'स्थानीय (ऑफ़लाइन)';
+
+  @override
+  String get settingsEngineGroq => 'Groq (क्लाउड)';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return 'स्थानीय मॉडल ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => 'स्थापित';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return 'स्थापित नहीं ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => 'मॉडल डाउनलोड करें';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return 'डाउनलोड हो रहा है... $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => 'मॉडल डाउनलोड हो गया';
 
   @override
   String get settingsApiKeyTitle => 'Groq API कुंजी';

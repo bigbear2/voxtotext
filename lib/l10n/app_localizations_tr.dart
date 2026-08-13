@@ -31,6 +31,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get statusProcessing => 'Groq ile sesli not işleniyor...';
 
   @override
+  String get statusProcessingLocal =>
+      'Cihazda yerel olarak yazıya dökülüyor...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return 'Model indiriliyor... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => 'Yazıya dökme tamamlandı!';
 
   @override
@@ -100,6 +109,42 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'Groq Dönüştürme';
+
+  @override
+  String get settingsSectionEngine => 'Transkripsiyon motoru';
+
+  @override
+  String get settingsEngineTitle => 'Transkripsiyon motoru';
+
+  @override
+  String get settingsEngineLocal => 'Yerel (çevrimdışı)';
+
+  @override
+  String get settingsEngineGroq => 'Groq (bulut)';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return 'Yerel model ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => 'Kuruldu';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return 'Kurulmadı ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => 'Modeli indir';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return 'İndiriliyor… $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => 'Model indirildi';
 
   @override
   String get settingsApiKeyTitle => 'Groq API Anahtarı';

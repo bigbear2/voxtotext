@@ -30,6 +30,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get statusProcessing => '正在使用 Groq 处理语音消息……';
 
   @override
+  String get statusProcessingLocal => '正在设备上进行本地转录...';
+
+  @override
+  String statusDownloadingModel(int percent) {
+    return '正在下载模型... $percent%';
+  }
+
+  @override
   String get transcriptionCompleted => '转写完成！';
 
   @override
@@ -99,6 +107,42 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsSectionApi => 'Groq 转录';
+
+  @override
+  String get settingsSectionEngine => '转录引擎';
+
+  @override
+  String get settingsEngineTitle => '转录引擎';
+
+  @override
+  String get settingsEngineLocal => '本地（离线）';
+
+  @override
+  String get settingsEngineGroq => 'Groq（云端）';
+
+  @override
+  String settingsModelDownloadTitle(String size) {
+    return '本地模型 ($size)';
+  }
+
+  @override
+  String get settingsModelDownloaded => '已安装';
+
+  @override
+  String settingsModelNotDownloaded(String size) {
+    return '未安装 ($size)';
+  }
+
+  @override
+  String get settingsModelDownload => '下载模型';
+
+  @override
+  String settingsModelDownloading(int percent) {
+    return '正在下载… $percent%';
+  }
+
+  @override
+  String get settingsModelDownloadedOk => '模型已下载';
 
   @override
   String get settingsApiKeyTitle => 'Groq API 密钥';
