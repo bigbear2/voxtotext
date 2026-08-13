@@ -34,6 +34,12 @@ android/local.properties
 # della chiave va messo SOLO in locale e non deve mai essere pushato.
 # git update-index --skip-worktree lib/secrets.dart  (per proteggerlo)
 
+# Dev-only local files (not part of the public release)
+TODOLIST.md
+struttura.txt
+**/struttura.txt
+*.bak
+
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
@@ -42,6 +48,7 @@ android/local.properties
 .pub-cache/
 .pub/
 /build/
+**/build/
 /coverage/
 
 # Symbolication related
