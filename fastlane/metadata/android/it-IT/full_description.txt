@@ -1,0 +1,11 @@
+VoxToText trascrive in testo i messaggi vocali condivisi da WhatsApp o Telegram.
+
+Funzionalità:
+- Ricezione e trascrizione dei vocali .opus tramite il menu di condivisione di Android.
+- Player audio integrato con riproduzione affidabile anche su dispositivi Xiaomi/MIUI.
+- Trascrizione AI tramite API Groq (Whisper large-v3).
+- Cronologia locale delle trascrizioni con riproduzione dell'audio.
+- 12 lingue localizzate e tema Chiaro / Scuro / Sistema.
+
+Serve una chiave API Groq gratuita, impostabile dalle Impostazioni dell'app
+(pulsante che apre console.groq.com/keys). L'app parte con chiave default vuota.

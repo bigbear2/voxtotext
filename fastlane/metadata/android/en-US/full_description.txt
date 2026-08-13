@@ -1,0 +1,11 @@
+VoxToText transcribes voice notes shared from WhatsApp or Telegram into text.
+
+Features:
+- Receive and transcribe .opus voice notes via the Android share menu.
+- Built-in audio player with reliable playback on Xiaomi/MIUI devices.
+- AI transcription powered by the Groq API (Whisper large-v3).
+- Local history of past transcriptions with audio replay.
+- 12 localized languages and Light / Dark / System themes.
+
+You need your own free Groq API key, set from the in-app Settings
+(button opens console.groq.com/keys). The app ships with an empty default key.
