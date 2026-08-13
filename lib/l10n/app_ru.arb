@@ -25,5 +25,24 @@
   "clearHistoryTitle": "Очистить историю",
   "clearHistoryBody": "Точно очистить всю историю?",
   "cancel": "Отмена",
-  "clear": "Очистить"
+  "clear": "Очистить",
+
+  "settingsTitle": "Настройки",
+  "settingsSectionApi": "Распознавание Groq",
+  "settingsApiKeyTitle": "API-ключ Groq",
+  "settingsApiKeyHint": "Вставьте ваш API-ключ Groq (gsk_...)",
+  "settingsApiKeyHelper": "Используется для распознавания голосовых сообщений. Получите бесплатный ключ ниже.",
+  "settingsGetKey": "Получить бесплатный ключ",
+  "settingsSectionGeneral": "Общие",
+  "settingsAppLangTitle": "Язык приложения",
+  "settingsAppLangSystem": "Системный (по умолчанию)",
+  "settingsTranscriptionLangTitle": "Язык распознавания",
+  "settingsSectionBehavior": "Поведение",
+  "settingsPlayAudioTitle": "Воспроизводить аудио во время распознавания",
+  "settingsPlayAudioSub": "Слушать голосовое сообщение во время распознавания",
+  "settingsSaveHistoryTitle": "Сохранять распознавания в историю",
+  "settingsSaveHistorySub": "Сохранять копию каждого распознанного текста",
+  "settingsSave": "Сохранить",
+  "settingsSaved": "Настройки сохранены",
+  "settingsKeyEmpty": "API-ключ пуст: распознавание не будет работать."
 }

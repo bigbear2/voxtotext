@@ -25,5 +25,24 @@
   "clearHistoryTitle": "Limpar Histórico",
   "clearHistoryBody": "Tem a certeza de que quer limpar todo o histórico?",
   "cancel": "Cancelar",
-  "clear": "Limpar"
+  "clear": "Limpar",
+
+  "settingsTitle": "Definições",
+  "settingsSectionApi": "Transcrição Groq",
+  "settingsApiKeyTitle": "Chave de API Groq",
+  "settingsApiKeyHint": "Cole a sua chave de API Groq (gsk_...)",
+  "settingsApiKeyHelper": "Usada para transcrever notas de voz. Obtenha uma chave gratuita abaixo.",
+  "settingsGetKey": "Obter uma chave gratuita",
+  "settingsSectionGeneral": "Geral",
+  "settingsAppLangTitle": "Idioma da aplicação",
+  "settingsAppLangSystem": "Sistema (predefinido)",
+  "settingsTranscriptionLangTitle": "Idioma de transcrição",
+  "settingsSectionBehavior": "Comportamento",
+  "settingsPlayAudioTitle": "Reproduzir áudio durante a transcrição",
+  "settingsPlayAudioSub": "Ouvir a nota de voz enquanto é transcrita",
+  "settingsSaveHistoryTitle": "Guardar transcrições no histórico",
+  "settingsSaveHistorySub": "Manter uma cópia de cada transcrição",
+  "settingsSave": "Guardar",
+  "settingsSaved": "Definições guardadas",
+  "settingsKeyEmpty": "A chave de API está vazia: a transcrição não funcionará."
 }

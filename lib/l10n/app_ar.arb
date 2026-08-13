@@ -25,5 +25,24 @@
   "clearHistoryTitle": "مسح السجل",
   "clearHistoryBody": "هل تريد بالتأكيد مسح السجل بالكامل؟",
   "cancel": "إلغاء",
-  "clear": "مسح"
+  "clear": "مسح",
+
+  "settingsTitle": "الإعدادات",
+  "settingsSectionApi": "النسخ باستخدام Groq",
+  "settingsApiKeyTitle": "مفتاح API لـ Groq",
+  "settingsApiKeyHint": "الصق مفتاح API الخاص بك (gsk_...)",
+  "settingsApiKeyHelper": "يُستخدم لنسخ الرسائل الصوتية. احصل على مفتاح مجاني أدناه.",
+  "settingsGetKey": "الحصول على مفتاح مجاني",
+  "settingsSectionGeneral": "عام",
+  "settingsAppLangTitle": "لغة التطبيق",
+  "settingsAppLangSystem": "النظام (افتراضي)",
+  "settingsTranscriptionLangTitle": "لغة النسخ",
+  "settingsSectionBehavior": "السلوك",
+  "settingsPlayAudioTitle": "تشغيل الصوت أثناء النسخ",
+  "settingsPlayAudioSub": "استمع إلى الرسالة الصوتية أثناء نسخها",
+  "settingsSaveHistoryTitle": "حفظ النسخ في السجل",
+  "settingsSaveHistorySub": "الاحتفاظ بنسخة من كل نص منسوخ",
+  "settingsSave": "حفظ",
+  "settingsSaved": "تم حفظ الإعدادات",
+  "settingsKeyEmpty": "مفتاح API فارغ: لن يعمل النسخ."
 }

@@ -94,4 +94,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clear => 'Clear';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsSectionApi => 'Groq Transcription';
+
+  @override
+  String get settingsApiKeyTitle => 'Groq API Key';
+
+  @override
+  String get settingsApiKeyHint => 'Paste your Groq API key (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'Used to transcribe voice notes. Get your free key below.';
+
+  @override
+  String get settingsGetKey => 'Get a free key';
+
+  @override
+  String get settingsSectionGeneral => 'General';
+
+  @override
+  String get settingsAppLangTitle => 'App language';
+
+  @override
+  String get settingsAppLangSystem => 'System (default)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'Transcription language';
+
+  @override
+  String get settingsSectionBehavior => 'Behaviour';
+
+  @override
+  String get settingsPlayAudioTitle => 'Play audio while transcribing';
+
+  @override
+  String get settingsPlayAudioSub =>
+      'Listen to the voice note while it is being transcribed';
+
+  @override
+  String get settingsSaveHistoryTitle => 'Save transcriptions to history';
+
+  @override
+  String get settingsSaveHistorySub =>
+      'Keep a copy of each transcription summary';
+
+  @override
+  String get settingsSave => 'Save';
+
+  @override
+  String get settingsSaved => 'Settings saved';
+
+  @override
+  String get settingsKeyEmpty =>
+      'The API key is empty: transcribing will not work.';
 }

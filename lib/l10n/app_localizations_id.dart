@@ -95,4 +95,60 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get clear => 'Bersihkan';
+
+  @override
+  String get settingsTitle => 'Pengaturan';
+
+  @override
+  String get settingsSectionApi => 'Transkripsi Groq';
+
+  @override
+  String get settingsApiKeyTitle => 'Kunci API Groq';
+
+  @override
+  String get settingsApiKeyHint => 'Tempel kunci API Groq Anda (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'Digunakan untuk mentranskripsi pesan suara. Dapatkan kunci gratis di bawah.';
+
+  @override
+  String get settingsGetKey => 'Dapatkan kunci gratis';
+
+  @override
+  String get settingsSectionGeneral => 'Umum';
+
+  @override
+  String get settingsAppLangTitle => 'Bahasa aplikasi';
+
+  @override
+  String get settingsAppLangSystem => 'Sistem (default)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'Bahasa transkripsi';
+
+  @override
+  String get settingsSectionBehavior => 'Perilaku';
+
+  @override
+  String get settingsPlayAudioTitle => 'Putar audio selama transkripsi';
+
+  @override
+  String get settingsPlayAudioSub => 'Dengarkan pesan suara saat ditranskripsi';
+
+  @override
+  String get settingsSaveHistoryTitle => 'Simpan transkripsi ke riwayat';
+
+  @override
+  String get settingsSaveHistorySub => 'Simpan salinan setiap transkripsi';
+
+  @override
+  String get settingsSave => 'Simpan';
+
+  @override
+  String get settingsSaved => 'Pengaturan disimpan';
+
+  @override
+  String get settingsKeyEmpty =>
+      'Kunci API kosong: transkripsi tidak akan berfungsi.';
 }

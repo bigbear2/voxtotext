@@ -38,3 +38,14 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+// url_launcher trascina androidx.core 1.17.0 e androidx.browser 1.9.0, che
+// richiedono AGP >= 8.9.1. Questo progetto usa AGP 8.6.0, quindi fissiamo le
+// versioni androidx a quelle compatibili con AGP 8.6.
+configurations.all {
+    resolutionStrategy {
+        force("androidx.core:core:1.13.1")
+        force("androidx.core:core-ktx:1.13.1")
+        force("androidx.browser:browser:1.8.0")
+    }
+}

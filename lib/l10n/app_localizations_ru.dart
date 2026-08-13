@@ -94,4 +94,63 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get clear => 'Очистить';
+
+  @override
+  String get settingsTitle => 'Настройки';
+
+  @override
+  String get settingsSectionApi => 'Распознавание Groq';
+
+  @override
+  String get settingsApiKeyTitle => 'API-ключ Groq';
+
+  @override
+  String get settingsApiKeyHint => 'Вставьте ваш API-ключ Groq (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'Используется для распознавания голосовых сообщений. Получите бесплатный ключ ниже.';
+
+  @override
+  String get settingsGetKey => 'Получить бесплатный ключ';
+
+  @override
+  String get settingsSectionGeneral => 'Общие';
+
+  @override
+  String get settingsAppLangTitle => 'Язык приложения';
+
+  @override
+  String get settingsAppLangSystem => 'Системный (по умолчанию)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'Язык распознавания';
+
+  @override
+  String get settingsSectionBehavior => 'Поведение';
+
+  @override
+  String get settingsPlayAudioTitle =>
+      'Воспроизводить аудио во время распознавания';
+
+  @override
+  String get settingsPlayAudioSub =>
+      'Слушать голосовое сообщение во время распознавания';
+
+  @override
+  String get settingsSaveHistoryTitle => 'Сохранять распознавания в историю';
+
+  @override
+  String get settingsSaveHistorySub =>
+      'Сохранять копию каждого распознанного текста';
+
+  @override
+  String get settingsSave => 'Сохранить';
+
+  @override
+  String get settingsSaved => 'Настройки сохранены';
+
+  @override
+  String get settingsKeyEmpty =>
+      'API-ключ пуст: распознавание не будет работать.';
 }

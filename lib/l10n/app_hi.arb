@@ -25,5 +25,24 @@
   "clearHistoryTitle": "इतिहास साफ़ करें",
   "clearHistoryBody": "क्या वाकई पूरा इतिहास साफ़ करें?",
   "cancel": "रद्द करें",
-  "clear": "साफ़ करें"
+  "clear": "साफ़ करें",
+
+  "settingsTitle": "सेटिंग्स",
+  "settingsSectionApi": "Groq ट्रांसक्रिप्शन",
+  "settingsApiKeyTitle": "Groq API कुंजी",
+  "settingsApiKeyHint": "अपनी Groq API कुंजी पेस्ट करें (gsk_...)",
+  "settingsApiKeyHelper": "वॉइस नोट ट्रांसक्राइब करने के लिए। नीचे मुफ़्त कुंजी पाएं।",
+  "settingsGetKey": "मुफ़्त कुंजी प्राप्त करें",
+  "settingsSectionGeneral": "सामान्य",
+  "settingsAppLangTitle": "ऐप भाषा",
+  "settingsAppLangSystem": "सिस्टम (डिफ़ॉल्ट)",
+  "settingsTranscriptionLangTitle": "ट्रांसक्रिप्शन भाषा",
+  "settingsSectionBehavior": "व्यवहार",
+  "settingsPlayAudioTitle": "ट्रांसक्रिप्शन के दौरान ऑडियो चलाएं",
+  "settingsPlayAudioSub": "ट्रांसक्राइब होते समय वॉइस नोट सुनें",
+  "settingsSaveHistoryTitle": "ट्रांसक्रिप्शन इतिहास में सहेजें",
+  "settingsSaveHistorySub": "प्रत्येक ट्रांसक्रिप्शन की एक प्रति रखें",
+  "settingsSave": "सहेजें",
+  "settingsSaved": "सेटिंग्स सहेजी गईं",
+  "settingsKeyEmpty": "API कुंजी खाली है: ट्रांसक्रिप्शन काम नहीं करेगा।"
 }

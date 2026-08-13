@@ -23,6 +23,7 @@ dependencies:
   just_audio: ^0.10.6
   share_plus: ^10.1.4
   shared_preferences: ^2.5.5
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,27 @@ dev_dependencies:
 
   flutter_lints: ^6.0.0
   sqflite_common_ffi: ^2.3.4
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "images/icons8_chat_room_256.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#009688"
+  adaptive_icon_foreground: "images/icons8_chat_room_256.png"
+  web:
+    generate: true
+    image_path: "images/icons8_chat_room_256.png"
+    background_color: "#009688"
+    theme_color: "#009688"
+  windows:
+    generate: true
+    image_path: "images/icons8_chat_room_256.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "images/icons8_chat_room_256.png"
 
 flutter:
   uses-material-design: true

@@ -94,4 +94,59 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get clear => 'مسح';
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get settingsSectionApi => 'النسخ باستخدام Groq';
+
+  @override
+  String get settingsApiKeyTitle => 'مفتاح API لـ Groq';
+
+  @override
+  String get settingsApiKeyHint => 'الصق مفتاح API الخاص بك (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'يُستخدم لنسخ الرسائل الصوتية. احصل على مفتاح مجاني أدناه.';
+
+  @override
+  String get settingsGetKey => 'الحصول على مفتاح مجاني';
+
+  @override
+  String get settingsSectionGeneral => 'عام';
+
+  @override
+  String get settingsAppLangTitle => 'لغة التطبيق';
+
+  @override
+  String get settingsAppLangSystem => 'النظام (افتراضي)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'لغة النسخ';
+
+  @override
+  String get settingsSectionBehavior => 'السلوك';
+
+  @override
+  String get settingsPlayAudioTitle => 'تشغيل الصوت أثناء النسخ';
+
+  @override
+  String get settingsPlayAudioSub => 'استمع إلى الرسالة الصوتية أثناء نسخها';
+
+  @override
+  String get settingsSaveHistoryTitle => 'حفظ النسخ في السجل';
+
+  @override
+  String get settingsSaveHistorySub => 'الاحتفاظ بنسخة من كل نص منسوخ';
+
+  @override
+  String get settingsSave => 'حفظ';
+
+  @override
+  String get settingsSaved => 'تم حفظ الإعدادات';
+
+  @override
+  String get settingsKeyEmpty => 'مفتاح API فارغ: لن يعمل النسخ.';
 }

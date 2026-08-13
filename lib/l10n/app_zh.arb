@@ -25,5 +25,24 @@
   "clearHistoryTitle": "清除历史记录",
   "clearHistoryBody": "确定要清空全部历史记录吗？",
   "cancel": "取消",
-  "clear": "清空"
+  "clear": "清空",
+
+  "settingsTitle": "设置",
+  "settingsSectionApi": "Groq 转录",
+  "settingsApiKeyTitle": "Groq API 密钥",
+  "settingsApiKeyHint": "粘贴您的 Groq API 密钥 (gsk_...)",
+  "settingsApiKeyHelper": "用于转录语音消息。在下方获取免费密钥。",
+  "settingsGetKey": "获取免费密钥",
+  "settingsSectionGeneral": "常规",
+  "settingsAppLangTitle": "应用语言",
+  "settingsAppLangSystem": "系统（默认）",
+  "settingsTranscriptionLangTitle": "转录语言",
+  "settingsSectionBehavior": "行为",
+  "settingsPlayAudioTitle": "转录时播放音频",
+  "settingsPlayAudioSub": "转录时收听语音消息",
+  "settingsSaveHistoryTitle": "将转录保存到历史记录",
+  "settingsSaveHistorySub": "保留每次转录的副本",
+  "settingsSave": "保存",
+  "settingsSaved": "设置已保存",
+  "settingsKeyEmpty": "API 密钥为空：转录将无法工作。"
 }

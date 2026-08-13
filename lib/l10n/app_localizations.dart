@@ -273,6 +273,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear'**
   String get clear;
+
+  /// Title of the settings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Section header for the API settings
+  ///
+  /// In en, this message translates to:
+  /// **'Groq Transcription'**
+  String get settingsSectionApi;
+
+  /// Label of the API key field
+  ///
+  /// In en, this message translates to:
+  /// **'Groq API Key'**
+  String get settingsApiKeyTitle;
+
+  /// Hint text inside the API key field
+  ///
+  /// In en, this message translates to:
+  /// **'Paste your Groq API key (gsk_...)'**
+  String get settingsApiKeyHint;
+
+  /// Helper text under the API key field
+  ///
+  /// In en, this message translates to:
+  /// **'Used to transcribe voice notes. Get your free key below.'**
+  String get settingsApiKeyHelper;
+
+  /// Button opening the Groq console keys page
+  ///
+  /// In en, this message translates to:
+  /// **'Get a free key'**
+  String get settingsGetKey;
+
+  /// Section header for general settings
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsSectionGeneral;
+
+  /// Label of the app language dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'App language'**
+  String get settingsAppLangTitle;
+
+  /// Option to follow the system language
+  ///
+  /// In en, this message translates to:
+  /// **'System (default)'**
+  String get settingsAppLangSystem;
+
+  /// Label of the transcription language dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Transcription language'**
+  String get settingsTranscriptionLangTitle;
+
+  /// Section header for behaviour toggles
+  ///
+  /// In en, this message translates to:
+  /// **'Behaviour'**
+  String get settingsSectionBehavior;
+
+  /// Title of the play-audio switch
+  ///
+  /// In en, this message translates to:
+  /// **'Play audio while transcribing'**
+  String get settingsPlayAudioTitle;
+
+  /// Subtitle of the play-audio switch
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to the voice note while it is being transcribed'**
+  String get settingsPlayAudioSub;
+
+  /// Title of the save-history switch
+  ///
+  /// In en, this message translates to:
+  /// **'Save transcriptions to history'**
+  String get settingsSaveHistoryTitle;
+
+  /// Subtitle of the save-history switch
+  ///
+  /// In en, this message translates to:
+  /// **'Keep a copy of each transcription summary'**
+  String get settingsSaveHistorySub;
+
+  /// Button to save the API key
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get settingsSave;
+
+  /// Snackbar after saving settings
+  ///
+  /// In en, this message translates to:
+  /// **'Settings saved'**
+  String get settingsSaved;
+
+  /// Warning when the API key is empty
+  ///
+  /// In en, this message translates to:
+  /// **'The API key is empty: transcribing will not work.'**
+  String get settingsKeyEmpty;
 }
 
 class _AppLocalizationsDelegate

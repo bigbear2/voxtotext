@@ -75,24 +75,17 @@ Oppure una semplice cartella `metadata/` da citare nella richiesta.
 
 ## ⚠️ Punti critici / Critical points
 
-### 🔑 La Groq API Key è hardcoded (PROBLEMA PER F-DROID)
-Il file `lib/main.dart` contiene una chiave API Groq in chiaro:
-`const String GROQ_API_KEY = "gsk_..."`.
+### 🔑 La Groq API Key non è più hardcoded ✅ (risolto)
+La chiave è stata rimossa dal sorgente e ora:
+- il default vive in `lib/secrets.dart`, committato **vuoto**;
+- la chiave reale si mette **solo in locale** e si protegge con:
+  `git update-index --skip-worktree lib/secrets.dart`;
+- su F-DROID/clone fresco resta vuota e **l'utente inserisce la propria chiave**
+  dalla schermata Impostazioni (campo "Groq API Key" + pulsante che apre
+  `https://console.groq.com/keys`).
 
-Per F-DROID (qui il codice **è pubblico**) ciò significa che la chiave verrebbe **esposta a tutti**.
-Devi scegliere una delle opzioni **prima di pubblicare**:
-
-- **A) L'utente inserisce la propria chiave** (consigliato):
-  Aggiungi un campo nelle Impostazioni dove l'utente incolla la sua chiave Groq
-  (gratuita su groq.com). Il codice legge la chiave da lì invece che dal sorgente.
-- **B) Backend proxy** (più complesso): un piccolo server intermedio che tenga la chiave
-  segreta e inoltri le richieste al client.
-- **C) `--dart-define`**: tieni la chiave fuori dal sorgente e compila con
-  `--dart-define=GROQ_API_KEY=...` — ma su F-DROID build automatiche **non potrai** passarla.
-
-> ⚠️ **Consiglio**: implementa l'opzione **A** (chiave utente nelle Impostazioni) per rendere
-> il progetto realmente "free", senza segreti nel sorgente. Questo è anche ciò che F-DROID
-> preferisce.
+Questo rende il progetto "free" senza segreti nel sorgente, come richiede F-DROID.
+Assicurati solo di **non committare mai** `lib/secrets.dart` con un valore reale.
 
 ### 🖼️ Icone e media
 - Le icone default di Flutter vanno sostituite con icone/marchio propri.

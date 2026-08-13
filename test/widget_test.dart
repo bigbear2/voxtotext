@@ -5,7 +5,6 @@
 // does not require a real device platform channel.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:voxtotext/main.dart';
 

@@ -25,5 +25,24 @@
   "clearHistoryTitle": "Geçmişi Temizle",
   "clearHistoryBody": "Geçmişin tamamı gerçekten temizlensin mi?",
   "cancel": "İptal",
-  "clear": "Temizle"
+  "clear": "Temizle",
+
+  "settingsTitle": "Ayarlar",
+  "settingsSectionApi": "Groq Dönüştürme",
+  "settingsApiKeyTitle": "Groq API Anahtarı",
+  "settingsApiKeyHint": "Groq API anahtarınızı yapıştırın (gsk_...)",
+  "settingsApiKeyHelper": "Sesli notları metne dönüştürmek için kullanılır. Aşağıdan ücretsiz bir anahtar alın.",
+  "settingsGetKey": "Ücretsiz anahtar al",
+  "settingsSectionGeneral": "Genel",
+  "settingsAppLangTitle": "Uygulama dili",
+  "settingsAppLangSystem": "Sistem (varsayılan)",
+  "settingsTranscriptionLangTitle": "Dönüştürme dili",
+  "settingsSectionBehavior": "Davranış",
+  "settingsPlayAudioTitle": "Dönüştürme sırasında sesi çal",
+  "settingsPlayAudioSub": "Dönüştürülürken sesli notu dinle",
+  "settingsSaveHistoryTitle": "Dönüştürmeleri geçmişe kaydet",
+  "settingsSaveHistorySub": "Her dönüştürmenin bir kopyasını sakla",
+  "settingsSave": "Kaydet",
+  "settingsSaved": "Ayarlar kaydedildi",
+  "settingsKeyEmpty": "API anahtarı boş: dönüştürme çalışmayacak."
 }

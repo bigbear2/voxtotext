@@ -14,12 +14,14 @@
 - [x] **Native Codec Integration**: Configured `ExoPlayer` / `MediaCodec` (`c2.android.opus.decoder`) for Opus decoding at 48kHz.
 - [x] **Gradle Modernization**: Upgraded Android Gradle Plugin to 8.6.0 and Kotlin to 2.0.0 for Flutter SDK compliance.
 - [x] **Test setup**: Smoke widget test con `sqflite_common_ffi` (verde).
+- [x] **Settings screen (Impostazioni)**: Groq API Key (modificabile + pulsante "Ottieni una chiave" che apre `console.groq.com/keys`), lingua app (override 12 lingue), lingua di trascrizione, toggle "Riproduci audio durante la trascrizione" e "Salva in cronologia". Tutto persistito con `shared_preferences` e riletto all'avvio.
+- [x] **Chiave API non più hardcoded**: rimossa dal sorgente; ora il default vive in `lib/secrets.dart` (file **vuoto** committato; la chiave reale va messa SOLO in locale e protetta con `git update-index --skip-worktree lib/secrets.dart`). Su F-DROID/clone fresco resta vuota e l'utente inserisce la propria dalle Impostazioni.
+- [x] **App icon**: generata da `images/icons8_chat_room_256.png` per Android (mipmap + adaptive), iOS, web, Windows (ico), macOS tramite `flutter_launcher_icons`.
 
 ---
 
 ## 🚧 Pending / Da Implementare
 
-- [ ] **Remove hardcoded Groq API key** (necessario per F-DROID: il sorgente è pubblico). Spostare la chiave nelle Impostazioni (l'utente incolla la propria) oppure usare `--dart-define`.
 - [ ] **Audio Session & Playback Fix**:
   - [ ] Implement `audio_session` configuration (`AndroidAudioUsage.media`, `AndroidAudioContentType.speech`) to prevent Xiaomi/MIUI auto-pause behavior on playback start.
   - [ ] Explicitly request `AndroidAudioFocusGainType.gain` before invoking `.play()`.

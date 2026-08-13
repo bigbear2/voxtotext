@@ -29,6 +29,11 @@ migrate_working_dir/
 # Local SDK paths (machine-specific)
 android/local.properties
 
+# Local secrets (real API keys) — never commit
+# Il file lib/secrets.dart è committato come template VUOTO; il valore reale
+# della chiave va messo SOLO in locale e non deve mai essere pushato.
+# git update-index --skip-worktree lib/secrets.dart  (per proteggerlo)
+
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id

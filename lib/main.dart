@@ -8,24 +8,48 @@ import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
 import 'package:share_handler/share_handler.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'db_helper.dart';
 import 'l10n/app_localizations.dart';
+import 'l10n_ext.dart';
+import 'languages.dart';
+import 'settings_screen.dart';
+import 'settings_service.dart';
 
-const String GROQ_API_KEY =
-    "VOXTOTEXT_DEFAULT_KEY_PLACEHOLDER";
-
-extension L10nX on BuildContext {
-  AppLocalizations get l10n => AppLocalizations.of(this);
-}
-
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SettingsService.instance.load();
   runApp(const VoxToTextApp());
 }
 
-class VoxToTextApp extends StatelessWidget {
+class VoxToTextApp extends StatefulWidget {
   const VoxToTextApp({super.key});
+
+  @override
+  State<VoxToTextApp> createState() => _VoxToTextAppState();
+}
+
+class _VoxToTextAppState extends State<VoxToTextApp> {
+  @override
+  void initState() {
+    super.initState();
+    SettingsService.instance.addListener(_onSettingsChanged);
+  }
+
+  @override
+  void dispose() {
+    SettingsService.instance.removeListener(_onSettingsChanged);
+    super.dispose();
+  }
+
+  void _onSettingsChanged() {
+    if (mounted) setState(() {});
+  }
+
+  Locale? get _localeOverride {
+    final code = SettingsService.instance.appLanguage;
+    if (code == 'system') return null;
+    return Locale(code);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +60,7 @@ class VoxToTextApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
+      locale: _localeOverride,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -119,28 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   String? _currentAudioPath;
 
-  // Lingue
-  String _selectedLanguageCode = "auto";
-  final Map<String, String> _languages = {
-    "auto": "",
-    "it": "Italiano",
-    "en": "English",
-    "es": "Español",
-    "de": "Deutsch",
-    "fr": "Français",
-    "pt": "Português",
-    "ru": "Русский",
-    "tr": "Türkçe",
-    "ar": "العربية",
-    "hi": "हिन्दी",
-    "id": "Bahasa Indonesia",
-    "zh": "中文",
-  };
-
   @override
   void initState() {
     super.initState();
-    _loadLanguagePreference();
     _initShareHandler();
   }
 
@@ -149,21 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _intentSubscription?.cancel();
     _audioPlayer.dispose();
     super.dispose();
-  }
-
-  Future<void> _loadLanguagePreference() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _selectedLanguageCode = prefs.getString('selected_language') ?? 'auto';
-    });
-  }
-
-  Future<void> _saveLanguagePreference(String code) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selected_language', code);
-    setState(() {
-      _selectedLanguageCode = code;
-    });
   }
 
   Future<void> _initShareHandler() async {
@@ -205,6 +196,10 @@ class _HomeScreenState extends State<HomeScreen> {
       await _audioPlayer.setFilePath(filePath);
       // Forzi il volume al massimo
       await _audioPlayer.setVolume(1.0);
+      // Riproduzione automatica (impostabile dalle Impostazioni)
+      if (SettingsService.instance.playAudio) {
+        await _audioPlayer.play();
+      }
     } catch (e) {
       debugPrint("Errore caricamento player: $e");
     }
@@ -241,12 +236,13 @@ class _HomeScreenState extends State<HomeScreen> {
         Uri.parse('https://api.groq.com/openai/v1/audio/transcriptions'),
       );
 
-      request.headers['Authorization'] = 'Bearer $GROQ_API_KEY';
+      request.headers['Authorization'] =
+          'Bearer ${SettingsService.instance.apiKey}';
       request.fields['model'] = 'whisper-large-v3';
       request.fields['response_format'] = 'json';
 
-      if (_selectedLanguageCode != "auto") {
-        request.fields['language'] = _selectedLanguageCode;
+      if (SettingsService.instance.prefLanguage != "auto") {
+        request.fields['language'] = SettingsService.instance.prefLanguage;
       }
 
       request.files.add(await http.MultipartFile.fromPath('file', file.path));
@@ -263,19 +259,21 @@ class _HomeScreenState extends State<HomeScreen> {
           _statusMessage = l10n.transcriptionCompleted;
         });
 
-        // Salvataggio in SQLite
-        final now = DateTime.now();
-        String formattedDate =
-            "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}";
+        // Salvataggio in SQLite (se abilitato nelle Impostazioni)
+        if (SettingsService.instance.saveHistory) {
+          final now = DateTime.now();
+          String formattedDate =
+              "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}";
 
-        await DBHelper.insert(
-          TranscriptionItem(
-            text: extractedText,
-            date: formattedDate,
-            audioPath: cleanPath,
-            language: _selectedLanguageCode,
-          ),
-        );
+          await DBHelper.insert(
+            TranscriptionItem(
+              text: extractedText,
+              date: formattedDate,
+              audioPath: cleanPath,
+              language: SettingsService.instance.prefLanguage,
+            ),
+          );
+        }
       } else {
         setState(() {
           _statusMessage = l10n.errorApi(response.statusCode, response.body);
@@ -320,6 +318,17 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: l10n.settingsTitle,
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -347,21 +356,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           isExpanded: true,
-                          value: _selectedLanguageCode,
-                          items: _languages.entries.map((entry) {
-                            return DropdownMenuItem<String>(
-                              value: entry.key,
+                          value: SettingsService.instance.prefLanguage,
+                          items: [
+                            DropdownMenuItem<String>(
+                              value: 'auto',
                               child: Text(
-                                entry.key == "auto"
-                                    ? l10n.languageAuto
-                                    : entry.value,
+                                l10n.languageAuto,
                                 style: const TextStyle(fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            );
-                          }).toList(),
+                            ),
+                            ...kTranscriptionLanguages.entries.map((entry) {
+                              return DropdownMenuItem<String>(
+                                value: entry.key,
+                                child: Text(
+                                  entry.value,
+                                  style: const TextStyle(fontSize: 12),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              );
+                            }),
+                          ],
                           onChanged: (val) {
-                            if (val != null) _saveLanguagePreference(val);
+                            if (val != null) {
+                              SettingsService.instance.setPrefLanguage(val);
+                            }
                           },
                         ),
                       ),

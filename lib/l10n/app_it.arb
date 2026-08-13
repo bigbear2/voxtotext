@@ -25,5 +25,24 @@
   "clearHistoryTitle": "Cancella Cronologia",
   "clearHistoryBody": "Vuoi davvero svuotare tutta la cronologia?",
   "cancel": "Annulla",
-  "clear": "Svuota"
+  "clear": "Svuota",
+
+  "settingsTitle": "Impostazioni",
+  "settingsSectionApi": "Trascrizione Groq",
+  "settingsApiKeyTitle": "Chiave API Groq",
+  "settingsApiKeyHint": "Incolla la tua chiave API Groq (gsk_...)",
+  "settingsApiKeyHelper": "Serve per trascrivere i messaggi vocali. Ottieni una chiave gratuita qui sotto.",
+  "settingsGetKey": "Ottieni una chiave gratuita",
+  "settingsSectionGeneral": "Generali",
+  "settingsAppLangTitle": "Lingua app",
+  "settingsAppLangSystem": "Sistema (predefinita)",
+  "settingsTranscriptionLangTitle": "Lingua di trascrizione",
+  "settingsSectionBehavior": "Comportamento",
+  "settingsPlayAudioTitle": "Riproduci audio durante la trascrizione",
+  "settingsPlayAudioSub": "Ascolta il messaggio vocale mentre viene trascritto",
+  "settingsSaveHistoryTitle": "Salva le trascrizioni in cronologia",
+  "settingsSaveHistorySub": "Conserva una copia di ogni riepilogo trascritto",
+  "settingsSave": "Salva",
+  "settingsSaved": "Impostazioni salvate",
+  "settingsKeyEmpty": "La chiave API è vuota: la trascrizione non funzionerà."
 }

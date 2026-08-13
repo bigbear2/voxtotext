@@ -96,4 +96,64 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get clear => 'Leeren';
+
+  @override
+  String get settingsTitle => 'Einstellungen';
+
+  @override
+  String get settingsSectionApi => 'Groq-Transkription';
+
+  @override
+  String get settingsApiKeyTitle => 'Groq-API-Schlüssel';
+
+  @override
+  String get settingsApiKeyHint =>
+      'Fügen Sie Ihren Groq-API-Schlüssel ein (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'Wird zum Transkribieren von Sprachnachrichten verwendet. Holen Sie unten einen kostenlosen Schlüssel.';
+
+  @override
+  String get settingsGetKey => 'Kostenlosen Schlüssel erhalten';
+
+  @override
+  String get settingsSectionGeneral => 'Allgemein';
+
+  @override
+  String get settingsAppLangTitle => 'App-Sprache';
+
+  @override
+  String get settingsAppLangSystem => 'System (Standard)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'Transkriptionssprache';
+
+  @override
+  String get settingsSectionBehavior => 'Verhalten';
+
+  @override
+  String get settingsPlayAudioTitle =>
+      'Audio während der Transkription abspielen';
+
+  @override
+  String get settingsPlayAudioSub =>
+      'Sprachnachricht während der Transkription anhören';
+
+  @override
+  String get settingsSaveHistoryTitle => 'Transkriptionen im Verlauf speichern';
+
+  @override
+  String get settingsSaveHistorySub =>
+      'Eine Kopie jeder Transkription aufbewahren';
+
+  @override
+  String get settingsSave => 'Speichern';
+
+  @override
+  String get settingsSaved => 'Einstellungen gespeichert';
+
+  @override
+  String get settingsKeyEmpty =>
+      'Der API-Schlüssel ist leer: Die Transkription wird nicht funktionieren.';
 }

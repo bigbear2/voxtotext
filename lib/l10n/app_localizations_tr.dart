@@ -94,4 +94,59 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get clear => 'Temizle';
+
+  @override
+  String get settingsTitle => 'Ayarlar';
+
+  @override
+  String get settingsSectionApi => 'Groq Dönüştürme';
+
+  @override
+  String get settingsApiKeyTitle => 'Groq API Anahtarı';
+
+  @override
+  String get settingsApiKeyHint => 'Groq API anahtarınızı yapıştırın (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'Sesli notları metne dönüştürmek için kullanılır. Aşağıdan ücretsiz bir anahtar alın.';
+
+  @override
+  String get settingsGetKey => 'Ücretsiz anahtar al';
+
+  @override
+  String get settingsSectionGeneral => 'Genel';
+
+  @override
+  String get settingsAppLangTitle => 'Uygulama dili';
+
+  @override
+  String get settingsAppLangSystem => 'Sistem (varsayılan)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'Dönüştürme dili';
+
+  @override
+  String get settingsSectionBehavior => 'Davranış';
+
+  @override
+  String get settingsPlayAudioTitle => 'Dönüştürme sırasında sesi çal';
+
+  @override
+  String get settingsPlayAudioSub => 'Dönüştürülürken sesli notu dinle';
+
+  @override
+  String get settingsSaveHistoryTitle => 'Dönüştürmeleri geçmişe kaydet';
+
+  @override
+  String get settingsSaveHistorySub => 'Her dönüştürmenin bir kopyasını sakla';
+
+  @override
+  String get settingsSave => 'Kaydet';
+
+  @override
+  String get settingsSaved => 'Ayarlar kaydedildi';
+
+  @override
+  String get settingsKeyEmpty => 'API anahtarı boş: dönüştürme çalışmayacak.';
 }

@@ -18,7 +18,12 @@
   - `just_audio`: Audio playback and stream routing.
   - Groq API (`whisper-large-v3`): Speech-to-text transcription.
   - `sqflite`: Local history of transcriptions.
+  - `shared_preferences`: persistent settings (API key, language, toggles).
+  - `url_launcher`: opens the Groq console keys page from Settings.
 - **Native Audio Codec Handling**: Android `MediaCodec` (`c2.android.opus.decoder`) set to 48kHz sampling rate.
+- **Settings / Impostazioni**: schermata dedicata (ingranaggio nell'AppBar) con Groq API Key
+  (modificabile, con pulsante per aprire `console.groq.com/keys`), lingua app, lingua di
+  trascrizione e toggle comportamento. Tutto salvato con `shared_preferences` e riletto all'avvio.
 
 ---
 

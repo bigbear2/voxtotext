@@ -95,4 +95,63 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get clear => 'Svuota';
+
+  @override
+  String get settingsTitle => 'Impostazioni';
+
+  @override
+  String get settingsSectionApi => 'Trascrizione Groq';
+
+  @override
+  String get settingsApiKeyTitle => 'Chiave API Groq';
+
+  @override
+  String get settingsApiKeyHint => 'Incolla la tua chiave API Groq (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'Serve per trascrivere i messaggi vocali. Ottieni una chiave gratuita qui sotto.';
+
+  @override
+  String get settingsGetKey => 'Ottieni una chiave gratuita';
+
+  @override
+  String get settingsSectionGeneral => 'Generali';
+
+  @override
+  String get settingsAppLangTitle => 'Lingua app';
+
+  @override
+  String get settingsAppLangSystem => 'Sistema (predefinita)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'Lingua di trascrizione';
+
+  @override
+  String get settingsSectionBehavior => 'Comportamento';
+
+  @override
+  String get settingsPlayAudioTitle =>
+      'Riproduci audio durante la trascrizione';
+
+  @override
+  String get settingsPlayAudioSub =>
+      'Ascolta il messaggio vocale mentre viene trascritto';
+
+  @override
+  String get settingsSaveHistoryTitle => 'Salva le trascrizioni in cronologia';
+
+  @override
+  String get settingsSaveHistorySub =>
+      'Conserva una copia di ogni riepilogo trascritto';
+
+  @override
+  String get settingsSave => 'Salva';
+
+  @override
+  String get settingsSaved => 'Impostazioni salvate';
+
+  @override
+  String get settingsKeyEmpty =>
+      'La chiave API è vuota: la trascrizione non funzionerà.';
 }

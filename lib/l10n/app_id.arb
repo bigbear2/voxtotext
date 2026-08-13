@@ -25,5 +25,24 @@
   "clearHistoryTitle": "Bersihkan Riwayat",
   "clearHistoryBody": "Yakin ingin mengosongkan seluruh riwayat?",
   "cancel": "Batal",
-  "clear": "Bersihkan"
+  "clear": "Bersihkan",
+
+  "settingsTitle": "Pengaturan",
+  "settingsSectionApi": "Transkripsi Groq",
+  "settingsApiKeyTitle": "Kunci API Groq",
+  "settingsApiKeyHint": "Tempel kunci API Groq Anda (gsk_...)",
+  "settingsApiKeyHelper": "Digunakan untuk mentranskripsi pesan suara. Dapatkan kunci gratis di bawah.",
+  "settingsGetKey": "Dapatkan kunci gratis",
+  "settingsSectionGeneral": "Umum",
+  "settingsAppLangTitle": "Bahasa aplikasi",
+  "settingsAppLangSystem": "Sistem (default)",
+  "settingsTranscriptionLangTitle": "Bahasa transkripsi",
+  "settingsSectionBehavior": "Perilaku",
+  "settingsPlayAudioTitle": "Putar audio selama transkripsi",
+  "settingsPlayAudioSub": "Dengarkan pesan suara saat ditranskripsi",
+  "settingsSaveHistoryTitle": "Simpan transkripsi ke riwayat",
+  "settingsSaveHistorySub": "Simpan salinan setiap transkripsi",
+  "settingsSave": "Simpan",
+  "settingsSaved": "Pengaturan disimpan",
+  "settingsKeyEmpty": "Kunci API kosong: transkripsi tidak akan berfungsi."
 }

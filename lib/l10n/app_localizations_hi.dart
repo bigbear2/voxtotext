@@ -95,4 +95,61 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get clear => 'साफ़ करें';
+
+  @override
+  String get settingsTitle => 'सेटिंग्स';
+
+  @override
+  String get settingsSectionApi => 'Groq ट्रांसक्रिप्शन';
+
+  @override
+  String get settingsApiKeyTitle => 'Groq API कुंजी';
+
+  @override
+  String get settingsApiKeyHint => 'अपनी Groq API कुंजी पेस्ट करें (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper =>
+      'वॉइस नोट ट्रांसक्राइब करने के लिए। नीचे मुफ़्त कुंजी पाएं।';
+
+  @override
+  String get settingsGetKey => 'मुफ़्त कुंजी प्राप्त करें';
+
+  @override
+  String get settingsSectionGeneral => 'सामान्य';
+
+  @override
+  String get settingsAppLangTitle => 'ऐप भाषा';
+
+  @override
+  String get settingsAppLangSystem => 'सिस्टम (डिफ़ॉल्ट)';
+
+  @override
+  String get settingsTranscriptionLangTitle => 'ट्रांसक्रिप्शन भाषा';
+
+  @override
+  String get settingsSectionBehavior => 'व्यवहार';
+
+  @override
+  String get settingsPlayAudioTitle => 'ट्रांसक्रिप्शन के दौरान ऑडियो चलाएं';
+
+  @override
+  String get settingsPlayAudioSub => 'ट्रांसक्राइब होते समय वॉइस नोट सुनें';
+
+  @override
+  String get settingsSaveHistoryTitle => 'ट्रांसक्रिप्शन इतिहास में सहेजें';
+
+  @override
+  String get settingsSaveHistorySub =>
+      'प्रत्येक ट्रांसक्रिप्शन की एक प्रति रखें';
+
+  @override
+  String get settingsSave => 'सहेजें';
+
+  @override
+  String get settingsSaved => 'सेटिंग्स सहेजी गईं';
+
+  @override
+  String get settingsKeyEmpty =>
+      'API कुंजी खाली है: ट्रांसक्रिप्शन काम नहीं करेगा।';
 }

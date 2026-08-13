@@ -93,4 +93,58 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get clear => '清空';
+
+  @override
+  String get settingsTitle => '设置';
+
+  @override
+  String get settingsSectionApi => 'Groq 转录';
+
+  @override
+  String get settingsApiKeyTitle => 'Groq API 密钥';
+
+  @override
+  String get settingsApiKeyHint => '粘贴您的 Groq API 密钥 (gsk_...)';
+
+  @override
+  String get settingsApiKeyHelper => '用于转录语音消息。在下方获取免费密钥。';
+
+  @override
+  String get settingsGetKey => '获取免费密钥';
+
+  @override
+  String get settingsSectionGeneral => '常规';
+
+  @override
+  String get settingsAppLangTitle => '应用语言';
+
+  @override
+  String get settingsAppLangSystem => '系统（默认）';
+
+  @override
+  String get settingsTranscriptionLangTitle => '转录语言';
+
+  @override
+  String get settingsSectionBehavior => '行为';
+
+  @override
+  String get settingsPlayAudioTitle => '转录时播放音频';
+
+  @override
+  String get settingsPlayAudioSub => '转录时收听语音消息';
+
+  @override
+  String get settingsSaveHistoryTitle => '将转录保存到历史记录';
+
+  @override
+  String get settingsSaveHistorySub => '保留每次转录的副本';
+
+  @override
+  String get settingsSave => '保存';
+
+  @override
+  String get settingsSaved => '设置已保存';
+
+  @override
+  String get settingsKeyEmpty => 'API 密钥为空：转录将无法工作。';
 }
