@@ -125,6 +125,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsAppLangSystem => 'सिस्टम (डिफ़ॉल्ट)';
 
   @override
+  String get settingsThemeTitle => 'थीम';
+
+  @override
+  String get settingsThemeSystem => 'सिस्टम';
+
+  @override
+  String get settingsThemeLight => 'हल्का';
+
+  @override
+  String get settingsThemeDark => 'गहरा';
+
+  @override
   String get settingsTranscriptionLangTitle => 'ट्रांसक्रिप्शन भाषा';
 
   @override

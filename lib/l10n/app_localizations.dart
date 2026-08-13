@@ -328,6 +328,30 @@ abstract class AppLocalizations {
   /// **'System (default)'**
   String get settingsAppLangSystem;
 
+  /// Label of the theme dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeTitle;
+
+  /// Theme option following the system
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// Theme option light
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// Theme option dark
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
   /// Label of the transcription language dropdown
   ///
   /// In en, this message translates to:

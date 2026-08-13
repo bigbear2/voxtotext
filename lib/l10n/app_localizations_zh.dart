@@ -122,6 +122,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsAppLangSystem => '系统（默认）';
 
   @override
+  String get settingsThemeTitle => '主题';
+
+  @override
+  String get settingsThemeSystem => '系统';
+
+  @override
+  String get settingsThemeLight => '浅色';
+
+  @override
+  String get settingsThemeDark => '深色';
+
+  @override
   String get settingsTranscriptionLangTitle => '转录语言';
 
   @override

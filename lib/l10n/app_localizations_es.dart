@@ -126,6 +126,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsAppLangSystem => 'Sistema (predeterminado)';
 
   @override
+  String get settingsThemeTitle => 'Tema';
+
+  @override
+  String get settingsThemeSystem => 'Sistema';
+
+  @override
+  String get settingsThemeLight => 'Claro';
+
+  @override
+  String get settingsThemeDark => 'Oscuro';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Idioma de transcripción';
 
   @override

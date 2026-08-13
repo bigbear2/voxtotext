@@ -124,6 +124,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsAppLangSystem => 'Sistem (varsayılan)';
 
   @override
+  String get settingsThemeTitle => 'Tema';
+
+  @override
+  String get settingsThemeSystem => 'Sistem';
+
+  @override
+  String get settingsThemeLight => 'Açık';
+
+  @override
+  String get settingsThemeDark => 'Koyu';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Dönüştürme dili';
 
   @override

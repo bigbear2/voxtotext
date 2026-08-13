@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,7 +19,35 @@ import 'settings_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.instance.load();
+  await _configureAudioSession();
   runApp(const VoxToTextApp());
+}
+
+/// Configura la sessione audio per il playback.
+///
+/// Necessario soprattutto su Xiaomi/MIUI: senza `AudioAttributes` e `Audio
+/// Focus` espliciti, `AudioTrack` parte con `streamType -1` e va subito in
+/// pausa (nessun audio). Qui forziamo contenuto "speech" + uso "media" +
+/// focus `gain` (che richiede il focus e avvia la riproduzione).
+Future<void> _configureAudioSession() async {
+  try {
+    final session = await AudioSession.instance;
+    await session.configure(
+      const AudioSessionConfiguration(
+        avAudioSessionCategory: AVAudioSessionCategory.playback,
+        avAudioSessionCategoryOptions:
+            AVAudioSessionCategoryOptions.allowBluetooth,
+        androidAudioAttributes: AndroidAudioAttributes(
+          contentType: AndroidAudioContentType.speech,
+          usage: AndroidAudioUsage.media,
+        ),
+        androidAudioFocusGainType: AndroidAudioFocusGainType.gain,
+        androidWillPauseWhenDucked: true,
+      ),
+    );
+  } catch (e) {
+    debugPrint('audio_session setup failed: $e');
+  }
 }
 
 class VoxToTextApp extends StatefulWidget {
@@ -53,6 +82,7 @@ class _VoxToTextAppState extends State<VoxToTextApp> {
 
   @override
   Widget build(BuildContext context) {
+    final themeModeValue = SettingsService.instance.themeMode;
     return MaterialApp(
       title: 'VoxToText',
       debugShowCheckedModeBanner: false,
@@ -60,6 +90,18 @@ class _VoxToTextAppState extends State<VoxToTextApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      themeMode: switch (themeModeValue) {
+        'dark' => ThemeMode.dark,
+        'light' => ThemeMode.light,
+        _ => ThemeMode.system,
+      },
       locale: _localeOverride,
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -179,12 +221,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void loadFromHistory(TranscriptionItem item) async {
     final l10n = context.l10n;
     await _audioPlayer.stop();
+    // Mostra il player SOLO se il file audio esiste ancora sul dispositivo,
+    // altrimenti resta nascosto (l'utente non vede un player "muto").
+    final audioExists = File(item.audioPath).existsSync();
     setState(() {
       _transcription = item.text;
-      _currentAudioPath = item.audioPath;
+      _currentAudioPath = audioExists ? item.audioPath : null;
       _statusMessage = l10n.loadedFromHistory(item.date);
     });
-    if (File(item.audioPath).existsSync()) {
+    if (audioExists) {
       await _setupAndPlayAudio(item.audioPath);
     }
   }
@@ -309,6 +354,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
     final statusMessage = _statusMessage.isEmpty
         ? l10n.homeStatusWaiting
         : _statusMessage;
@@ -393,7 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // STATUS CARD
             Card(
-              color: Colors.teal.shade50,
+              color: theme.colorScheme.surfaceContainerHighest,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
@@ -521,9 +567,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: theme.colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey[300]!),
+                  border: Border.all(color: theme.colorScheme.outlineVariant),
                 ),
                 child: SingleChildScrollView(
                   child: SelectableText(

@@ -16,6 +16,7 @@ class SettingsService extends ChangeNotifier {
   static const _kApiKey = 'groq_api_key';
   static const _kPrefLanguage = 'selected_language';
   static const _kAppLanguage = 'app_language';
+  static const _kThemeMode = 'theme_mode';
   static const _kPlayAudio = 'play_audio';
   static const _kSaveHistory = 'save_history';
 
@@ -24,6 +25,7 @@ class SettingsService extends ChangeNotifier {
   String _apiKey = defaultGroqApiKey;
   String _prefLanguage = 'auto';
   String _appLanguage = 'system'; // 'system' oppure codice lingua es. 'it'
+  String _themeMode = 'system'; // 'system' | 'light' | 'dark'
   bool _playAudio = true;
   bool _saveHistory = true;
 
@@ -36,6 +38,7 @@ class SettingsService extends ChangeNotifier {
     _apiKey = _prefs.getString(_kApiKey) ?? defaultGroqApiKey;
     _prefLanguage = _prefs.getString(_kPrefLanguage) ?? 'auto';
     _appLanguage = _prefs.getString(_kAppLanguage) ?? 'system';
+    _themeMode = _prefs.getString(_kThemeMode) ?? 'system';
     _playAudio = _prefs.getBool(_kPlayAudio) ?? true;
     _saveHistory = _prefs.getBool(_kSaveHistory) ?? true;
     _loaded = true;
@@ -45,6 +48,7 @@ class SettingsService extends ChangeNotifier {
   String get apiKey => _apiKey;
   String get prefLanguage => _prefLanguage;
   String get appLanguage => _appLanguage;
+  String get themeMode => _themeMode;
   bool get playAudio => _playAudio;
   bool get saveHistory => _saveHistory;
 
@@ -63,6 +67,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setAppLanguage(String value) async {
     _appLanguage = value;
     await _prefs.setString(_kAppLanguage, value);
+    notifyListeners();
+  }
+
+  Future<void> setThemeMode(String value) async {
+    _themeMode = value;
+    await _prefs.setString(_kThemeMode, value);
     notifyListeners();
   }
 

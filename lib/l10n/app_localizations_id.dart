@@ -125,6 +125,18 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsAppLangSystem => 'Sistem (default)';
 
   @override
+  String get settingsThemeTitle => 'Tema';
+
+  @override
+  String get settingsThemeSystem => 'Sistem';
+
+  @override
+  String get settingsThemeLight => 'Terang';
+
+  @override
+  String get settingsThemeDark => 'Gelap';
+
+  @override
   String get settingsTranscriptionLangTitle => 'Bahasa transkripsi';
 
   @override

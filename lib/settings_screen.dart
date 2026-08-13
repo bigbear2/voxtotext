@@ -125,6 +125,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               _dropdownTile<String>(
+                label: l10n.settingsThemeTitle,
+                value: settings.themeMode,
+                items: [
+                  DropdownMenuItem(
+                    value: 'system',
+                    child: Text(l10n.settingsThemeSystem),
+                  ),
+                  DropdownMenuItem(
+                    value: 'light',
+                    child: Text(l10n.settingsThemeLight),
+                  ),
+                  DropdownMenuItem(
+                    value: 'dark',
+                    child: Text(l10n.settingsThemeDark),
+                  ),
+                ],
+                onChanged: (v) {
+                  if (v != null) settings.setThemeMode(v);
+                },
+              ),
+              _dropdownTile<String>(
                 label: l10n.settingsTranscriptionLangTitle,
                 value: settings.prefLanguage,
                 items: [
@@ -169,7 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: Text(
         title,
         style: TextStyle(
-          color: Colors.teal.shade800,
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.bold,
           fontSize: 14,
           letterSpacing: 0.5,
