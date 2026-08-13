@@ -1,0 +1,97 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Russian (`ru`).
+class AppLocalizationsRu extends AppLocalizations {
+  AppLocalizationsRu([String locale = 'ru']) : super(locale);
+
+  @override
+  String get appTitle => 'VoxToText';
+
+  @override
+  String get navTranscribe => 'Расшифровать';
+
+  @override
+  String get navHistory => 'История';
+
+  @override
+  String get langLabel => 'Язык:';
+
+  @override
+  String get languageAuto => 'Автоматически (определение)';
+
+  @override
+  String get homeStatusWaiting =>
+      'Ожидание аудиофайла, отправленного из WhatsApp или Telegram...';
+
+  @override
+  String get statusProcessing => 'Обработка голосового сообщения с Groq...';
+
+  @override
+  String get transcriptionCompleted => 'Расшифровка завершена!';
+
+  @override
+  String get noTextExtracted => 'Текст не извлечён.';
+
+  @override
+  String get errorFileNotFound => 'Ошибка: аудиофайл не найден на устройстве.';
+
+  @override
+  String loadedFromHistory(String date) {
+    return 'Загружено из истории ($date)';
+  }
+
+  @override
+  String errorApi(int code, String body) {
+    return 'Ошибка API Groq [$code]: $body';
+  }
+
+  @override
+  String errorConversion(String error) {
+    return 'Ошибка при конвертации: $error';
+  }
+
+  @override
+  String get copiedClipboard => 'Текст скопирован в буфер обмена!';
+
+  @override
+  String get shareSubject => 'Расшифровка голоса';
+
+  @override
+  String get transcribedLabel => 'Расшифрованный текст:';
+
+  @override
+  String get btnCopy => 'Копировать';
+
+  @override
+  String get btnShare => 'Поделиться';
+
+  @override
+  String get historyTitle => 'История расшифровок';
+
+  @override
+  String get historyEmpty => 'В истории нет расшифровок.';
+
+  @override
+  String historyItemSubtitle(String date, String langLabel, String language) {
+    return '$date • $langLabel: $language';
+  }
+
+  @override
+  String get historyLangLabel => 'Язык';
+
+  @override
+  String get clearHistoryTitle => 'Очистить историю';
+
+  @override
+  String get clearHistoryBody => 'Точно очистить всю историю?';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get clear => 'Очистить';
+}

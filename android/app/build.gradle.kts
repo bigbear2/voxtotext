@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.bigbear2.audioscribe"
+    namespace = "com.bigbear2.voxtotext"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "dev.bigbear2.audioscribe"
+        applicationId = "com.bigbear2.voxtotext"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = 1

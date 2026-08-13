@@ -1,5 +1,5 @@
-name: audio_to_text_wa
-description: "Trascrizione vocali WhatsApp"
+name: voxtotext
+description: "Trascrizione vocali WhatsApp e Telegram in testo"
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -10,7 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
+  intl: any
   cupertino_icons: ^1.0.8
   http: ^1.6.0
   path_provider: ^2.1.6
@@ -26,6 +29,8 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  sqflite_common_ffi: ^2.3.4
 
 flutter:
   uses-material-design: true
+  generate: true

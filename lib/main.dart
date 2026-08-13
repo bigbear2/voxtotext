@@ -3,32 +3,54 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
 import 'package:share_handler/share_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'db_helper.dart';
+import 'l10n/app_localizations.dart';
 
-const String GROQ_API_KEY = "VOXTOTEXT_DEFAULT_KEY_PLACEHOLDER";
+const String GROQ_API_KEY =
+    "VOXTOTEXT_DEFAULT_KEY_PLACEHOLDER";
+
+extension L10nX on BuildContext {
+  AppLocalizations get l10n => AppLocalizations.of(this);
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const VocaleToTextApp());
+  runApp(const VoxToTextApp());
 }
 
-class VocaleToTextApp extends StatelessWidget {
-  const VocaleToTextApp({super.key});
+class VoxToTextApp extends StatelessWidget {
+  const VoxToTextApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vocale2Testo Pro',
+      title: 'VoxToText',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      localeResolutionCallback: (deviceLocale, supportedLocales) {
+        for (final locale in supportedLocales) {
+          if (locale.languageCode == deviceLocale?.languageCode) {
+            return locale;
+          }
+        }
+        return supportedLocales.first;
+      },
       home: const MainTabScreen(),
     );
   }
@@ -52,20 +74,28 @@ class _MainTabScreenState extends State<MainTabScreen> {
         index: _currentIndex,
         children: [
           HomeScreen(key: _homeKey),
-          HistoryScreen(onSelectHistory: (item) {
-            setState(() {
-              _currentIndex = 0;
-            });
-            _homeKey.currentState?.loadFromHistory(item);
-          }),
+          HistoryScreen(
+            onSelectHistory: (item) {
+              setState(() {
+                _currentIndex = 0;
+              });
+              _homeKey.currentState?.loadFromHistory(item);
+            },
+          ),
         ],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (idx) => setState(() => _currentIndex = idx),
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.mic), label: 'Trascrivi'),
-          NavigationDestination(icon: Icon(Icons.history), label: 'Cronologia'),
+        destinations: [
+          NavigationDestination(
+            icon: const Icon(Icons.mic),
+            label: context.l10n.navTranscribe,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.history),
+            label: context.l10n.navHistory,
+          ),
         ],
       ),
     );
@@ -82,7 +112,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String _transcription = "";
   bool _isLoading = false;
-  String _statusMessage = "In attesa di un file audio condiviso da WhatsApp...";
+  String _statusMessage = "";
   StreamSubscription? _intentSubscription;
 
   // Player Audio
@@ -92,12 +122,19 @@ class _HomeScreenState extends State<HomeScreen> {
   // Lingue
   String _selectedLanguageCode = "auto";
   final Map<String, String> _languages = {
-    "auto": "AUTOMATICO (Auto-Detect)",
+    "auto": "",
     "it": "Italiano",
-    "en": "Inglese",
-    "es": "Spagnolo",
-    "fr": "Francese",
-    "de": "Tedesco",
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "fr": "Français",
+    "pt": "Português",
+    "ru": "Русский",
+    "tr": "Türkçe",
+    "ar": "العربية",
+    "hi": "हिन्दी",
+    "id": "Bahasa Indonesia",
+    "zh": "中文",
   };
 
   @override
@@ -133,7 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final handler = ShareHandlerPlatform.instance;
 
     final initialMedia = await handler.getInitialSharedMedia();
-    if (initialMedia != null && initialMedia.attachments != null && initialMedia.attachments!.isNotEmpty) {
+    if (initialMedia != null &&
+        initialMedia.attachments != null &&
+        initialMedia.attachments!.isNotEmpty) {
       final path = initialMedia.attachments!.first?.path;
       if (path != null) _processAudioFile(path);
     }
@@ -147,11 +186,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void loadFromHistory(TranscriptionItem item) async {
+    final l10n = context.l10n;
     await _audioPlayer.stop();
     setState(() {
       _transcription = item.text;
       _currentAudioPath = item.audioPath;
-      _statusMessage = "Caricato dalla cronologia (${item.date})";
+      _statusMessage = l10n.loadedFromHistory(item.date);
     });
     if (File(item.audioPath).existsSync()) {
       await _setupAndPlayAudio(item.audioPath);
@@ -171,11 +211,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _processAudioFile(String rawPath) async {
+    final l10n = context.l10n;
     await _audioPlayer.stop();
     setState(() {
       _isLoading = true;
       _transcription = "";
-      _statusMessage = "Elaborazione vocale WhatsApp in corso con Groq...";
+      _statusMessage = l10n.statusProcessing;
     });
 
     try {
@@ -187,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (!await file.exists()) {
         setState(() {
           _isLoading = false;
-          _statusMessage = "Errore: File audio non trovato sul dispositivo.";
+          _statusMessage = l10n.errorFileNotFound;
         });
         return;
       }
@@ -215,33 +256,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        String extractedText = data['text'] ?? "Nessun testo estratto.";
+        String extractedText = data['text'] ?? l10n.noTextExtracted;
 
         setState(() {
           _transcription = extractedText;
-          _statusMessage = "Trascrizione completata!";
+          _statusMessage = l10n.transcriptionCompleted;
         });
 
         // Salvataggio in SQLite
         final now = DateTime.now();
-        String formattedDate = "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}";
-        
-        await DBHelper.insert(TranscriptionItem(
-          text: extractedText,
-          date: formattedDate,
-          audioPath: cleanPath,
-          language: _selectedLanguageCode,
-        ));
+        String formattedDate =
+            "${now.day}/${now.month}/${now.year} ${now.hour}:${now.minute.toString().padLeft(2, '0')}";
 
+        await DBHelper.insert(
+          TranscriptionItem(
+            text: extractedText,
+            date: formattedDate,
+            audioPath: cleanPath,
+            language: _selectedLanguageCode,
+          ),
+        );
       } else {
         setState(() {
-          _statusMessage = "Errore API Groq [${response.statusCode}]: ${response.body}";
+          _statusMessage = l10n.errorApi(response.statusCode, response.body);
         });
       }
-
     } catch (e) {
       setState(() {
-        _statusMessage = "Errore durante la conversione: $e";
+        _statusMessage = l10n.errorConversion(e.toString());
       });
     } finally {
       setState(() {
@@ -251,25 +293,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _copyToClipboard() {
+    final l10n = context.l10n;
     if (_transcription.isNotEmpty) {
       Clipboard.setData(ClipboardData(text: _transcription));
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Testo copiato negli appunti!')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.copiedClipboard)));
     }
   }
 
   void _shareText() {
     if (_transcription.isNotEmpty) {
-      Share.share(_transcription, subject: 'Trascrizione Vocale');
+      Share.share(_transcription, subject: context.l10n.shareSubject);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final statusMessage = _statusMessage.isEmpty
+        ? l10n.homeStatusWaiting
+        : _statusMessage;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vocale2Testo Pro'),
+        title: const Text('VoxToText'),
         centerTitle: true,
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
@@ -283,12 +330,18 @@ class _HomeScreenState extends State<HomeScreen> {
             Card(
               elevation: 2,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 4.0,
+                ),
                 child: Row(
                   children: [
                     const Icon(Icons.language, color: Colors.teal),
                     const SizedBox(width: 8),
-                    const Text("Lingua:", style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      l10n.langLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: DropdownButtonHideUnderline(
@@ -299,7 +352,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             return DropdownMenuItem<String>(
                               value: entry.key,
                               child: Text(
-                                entry.value, 
+                                entry.key == "auto"
+                                    ? l10n.languageAuto
+                                    : entry.value,
                                 style: const TextStyle(fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -323,9 +378,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  _statusMessage,
+                  statusMessage,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
@@ -344,7 +402,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Card(
                 elevation: 1,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       StreamBuilder<PlayerState>(
@@ -356,21 +417,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           if (playing != true) {
                             return IconButton(
-                              icon: const Icon(Icons.play_arrow, color: Colors.teal, size: 32),
+                              icon: const Icon(
+                                Icons.play_arrow,
+                                color: Colors.teal,
+                                size: 32,
+                              ),
                               onPressed: () {
                                 _audioPlayer.play();
                               },
                             );
-                          } else if (processingState != ProcessingState.completed) {
+                          } else if (processingState !=
+                              ProcessingState.completed) {
                             return IconButton(
-                              icon: const Icon(Icons.pause, color: Colors.teal, size: 32),
+                              icon: const Icon(
+                                Icons.pause,
+                                color: Colors.teal,
+                                size: 32,
+                              ),
                               onPressed: () {
                                 _audioPlayer.pause();
                               },
                             );
                           } else {
                             return IconButton(
-                              icon: const Icon(Icons.replay, color: Colors.teal, size: 32),
+                              icon: const Icon(
+                                Icons.replay,
+                                color: Colors.teal,
+                                size: 32,
+                              ),
                               onPressed: () {
                                 _audioPlayer.seek(Duration.zero);
                                 _audioPlayer.play();
@@ -384,13 +458,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           stream: _audioPlayer.positionStream,
                           builder: (context, snapshot) {
                             final position = snapshot.data ?? Duration.zero;
-                            final duration = _audioPlayer.duration ?? Duration.zero;
+                            final duration =
+                                _audioPlayer.duration ?? Duration.zero;
                             return Slider(
                               activeColor: Colors.teal,
-                              value: position.inMilliseconds.toDouble().clamp(0.0, duration.inMilliseconds.toDouble()),
-                              max: duration.inMilliseconds.toDouble() > 0 ? duration.inMilliseconds.toDouble() : 1.0,
+                              value: position.inMilliseconds.toDouble().clamp(
+                                0.0,
+                                duration.inMilliseconds.toDouble(),
+                              ),
+                              max: duration.inMilliseconds.toDouble() > 0
+                                  ? duration.inMilliseconds.toDouble()
+                                  : 1.0,
                               onChanged: (val) {
-                                _audioPlayer.seek(Duration(milliseconds: val.toInt()));
+                                _audioPlayer.seek(
+                                  Duration(milliseconds: val.toInt()),
+                                );
                               },
                             );
                           },
@@ -405,13 +487,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // AREA TESTO TRASCRITTO + PULSANTI
             if (_transcription.isNotEmpty) ...[
-              const Text(
-                "Testo Trascritto:",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              Text(
+                l10n.transcribedLabel,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               const SizedBox(height: 8),
               Container(
-                constraints: const BoxConstraints(minHeight: 120, maxHeight: 250),
+                constraints: const BoxConstraints(
+                  minHeight: 120,
+                  maxHeight: 250,
+                ),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
@@ -432,7 +520,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ElevatedButton.icon(
                       onPressed: _copyToClipboard,
                       icon: const Icon(Icons.copy),
-                      label: const Text("Copia"),
+                      label: Text(l10n.btnCopy),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.teal,
                         foregroundColor: Colors.white,
@@ -444,7 +532,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ElevatedButton.icon(
                       onPressed: _shareText,
                       icon: const Icon(Icons.share),
-                      label: const Text("Condividi"),
+                      label: Text(l10n.btnShare),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.teal.shade700,
                         foregroundColor: Colors.white,
@@ -453,7 +541,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            ]
+            ],
           ],
         ),
       ),
@@ -501,9 +589,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cronologia Trascrizioni'),
+        title: Text(l10n.historyTitle),
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
         actions: [
@@ -514,53 +603,68 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: const Text("Cancella Cronologia"),
-                    content: const Text("Vuoi davvero svuotare tutta la cronologia?"),
+                    title: Text(l10n.clearHistoryTitle),
+                    content: Text(l10n.clearHistoryBody),
                     actions: [
-                      TextButton(onPressed: () => Navigator.pop(ctx), child: const Text("Annulla")),
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx),
+                        child: Text(l10n.cancel),
+                      ),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(ctx);
                           _clearAll();
                         },
-                        child: const Text("Svuota", style: TextStyle(color: Colors.red)),
+                        child: Text(
+                          l10n.clear,
+                          style: const TextStyle(color: Colors.red),
+                        ),
                       ),
                     ],
                   ),
                 );
               },
-            )
+            ),
         ],
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator(color: Colors.teal))
           : _history.isEmpty
-              ? const Center(child: Text("Nessuna trascrizione in cronologia."))
-              : ListView.builder(
-                  itemCount: _history.length,
-                  itemBuilder: (ctx, i) {
-                    final item = _history[i];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      child: ListTile(
-                        title: Text(
-                          item.text,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        subtitle: Text("${item.date} • Lang: ${item.language}"),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline, color: Colors.red),
-                          onPressed: () {
-                            if (item.id != null) _deleteItem(item.id!);
-                          },
-                        ),
-                        onTap: () => widget.onSelectHistory(item),
+          ? Center(child: Text(l10n.historyEmpty))
+          : ListView.builder(
+              itemCount: _history.length,
+              itemBuilder: (ctx, i) {
+                final item = _history[i];
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      item.text,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      l10n.historyItemSubtitle(
+                        item.date,
+                        l10n.historyLangLabel,
+                        item.language,
                       ),
-                    );
-                  },
-                ),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete_outline, color: Colors.red),
+                      onPressed: () {
+                        if (item.id != null) _deleteItem(item.id!);
+                      },
+                    ),
+                    onTap: () => widget.onSelectHistory(item),
+                  ),
+                );
+              },
+            ),
     );
   }
 }

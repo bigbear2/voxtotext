@@ -1,4 +1,4 @@
-package dev.bigbear2.audioscribe
+package com.bigbear2.voxtotext
 
 import io.flutter.embedding.android.FlutterActivity
 

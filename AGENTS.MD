@@ -5,8 +5,8 @@ This document serves as the persistent contextual memory for AI agents (Gemini, 
 ---
 
 ## 📌 Project Summary
-- **App Name**: `audio_to_text_wa` (Package: `dev.bigbear2.audioscribe` / `com.example.audio_to_text_wa`)
-- **Core Purpose**: Receive shared WhatsApp audio messages (`.opus`), decode/play them reliably on Android, and pass them to a transcription engine.
+- **App Name**: `VoxToText` (Package: `com.bigbear2.voxtotext` — ex `audio_to_text_wa` / `dev.bigbear2.audioscribe`)
+- **Core Purpose**: Receive shared voice notes from WhatsApp/Telegram (`.opus`), decode/play them reliably on Android, and pass them to a transcription engine.
 
 ---
 

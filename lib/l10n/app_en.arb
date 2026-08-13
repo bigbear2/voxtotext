@@ -1,0 +1,62 @@
+{
+  "@@locale": "en",
+  "appTitle": "VoxToText",
+
+  "navTranscribe": "Transcribe",
+  "@navTranscribe": {"description": "Bottom navigation tab to transcribe a voice note"},
+  "navHistory": "History",
+  "@navHistory": {"description": "Bottom navigation tab showing past transcriptions"},
+
+  "langLabel": "Language:",
+  "@langLabel": {"description": "Label before the language dropdown"},
+  "languageAuto": "Automatic (auto-detect)",
+  "@languageAuto": {"description": "Dropdown option: auto-detects the audio language"},
+
+  "homeStatusWaiting": "Waiting for an audio file shared from WhatsApp or Telegram...",
+  "@homeStatusWaiting": {"description": "Idle status message on the home screen"},
+
+  "statusProcessing": "Processing voice note with Groq...",
+  "@statusProcessing": {"description": "Status shown while transcribing"},
+  "transcriptionCompleted": "Transcription completed!",
+  "@transcriptionCompleted": {"description": "Status shown after a successful transcription"},
+  "noTextExtracted": "No text extracted.",
+  "@noTextExtracted": {"description": "Fallback when the API returns no text"},
+  "errorFileNotFound": "Error: audio file not found on the device.",
+  "@errorFileNotFound": {"description": "Shown when the shared audio file does not exist"},
+  "loadedFromHistory": "Loaded from history ({date})",
+  "@loadedFromHistory": {"description": "Status when loading a past transcription", "placeholders": {"date": {"type": "String"}}},
+  "errorApi": "Groq API error [{code}]: {body}",
+  "@errorApi": {"description": "Shown when the Groq API returns an error", "placeholders": {"code": {"type": "int"}, "body": {"type": "String"}}},
+  "errorConversion": "Error during conversion: {error}",
+  "@errorConversion": {"description": "Generic conversion error", "placeholders": {"error": {"type": "String"}}},
+
+  "copiedClipboard": "Text copied to the clipboard!",
+  "@copiedClipboard": {"description": "Snackbar after copying the transcription"},
+  "shareSubject": "Voice transcription",
+  "@shareSubject": {"description": "Subject used when sharing the transcription text"},
+
+  "transcribedLabel": "Transcribed text:",
+  "@transcribedLabel": {"description": "Heading above the resulting text"},
+  "btnCopy": "Copy",
+  "@btnCopy": {"description": "Button to copy the transcription"},
+  "btnShare": "Share",
+  "@btnShare": {"description": "Button to share the transcription"},
+
+  "historyTitle": "Transcription History",
+  "@historyTitle": {"description": "Title of the history screen"},
+  "historyEmpty": "No transcriptions in history.",
+  "@historyEmpty": {"description": "Empty history message"},
+  "historyItemSubtitle": "{date} • {langLabel}: {language}",
+  "@historyItemSubtitle": {"description": "Subtitle of a history item", "placeholders": {"date": {"type": "String"}, "langLabel": {"type": "String"}, "language": {"type": "String"}}},
+  "historyLangLabel": "Lang",
+  "@historyLangLabel": {"description": "Short label meaning Language in history items"},
+
+  "clearHistoryTitle": "Clear History",
+  "@clearHistoryTitle": {"description": "Dialog title to confirm clearing history"},
+  "clearHistoryBody": "Really clear the whole history?",
+  "@clearHistoryBody": {"description": "Dialog body asking confirmation"},
+  "cancel": "Cancel",
+  "@cancel": {"description": "Button to dismiss a dialog"},
+  "clear": "Clear",
+  "@clear": {"description": "Button to confirm clearing"}
+}
