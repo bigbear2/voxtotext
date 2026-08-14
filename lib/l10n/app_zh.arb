@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "zh",
   "appTitle": "VoxToText",
   "navTranscribe": "转写",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "正在等待从 WhatsApp 或 Telegram 分享的音频文件……",
   "statusProcessing": "正在使用 Groq 处理语音消息……",
 
+    "engineLabelLocal": "本地",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "正在设备上进行本地转录...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "正在下载模型... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "保留每次转录的副本",
   "settingsSave": "保存",
   "settingsSaved": "设置已保存",
-  "settingsKeyEmpty": "API 密钥为空：转录将无法工作。"
+  "settingsKeyEmpty": "API 密钥为空：转录将无法工作。",
+  "settingsSectionModel": "本地模型",
+  "settingsModelSelectTitle": "Whisper 模型",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "最小且最快（约 3900 万参数），非常适合资源非常有限的设备，但准确度较低。",
+  "modelBaseDesc": "约 7400 万参数，适合快速测试或简单任务。",
+  "modelSmallDesc": "体积小，适合一般使用的不错折衷。",
+  "modelMediumDesc": "高性能，需要更多内存（RAM/VRAM）。",
+  "modelLargeDesc": "旗舰模型，超过 15 亿参数。最高准确度，可处理方言、背景噪音和复杂翻译。",
+  "settingsModelDownloadHint": "所选模型在首次使用时下载。"
 }

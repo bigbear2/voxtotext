@@ -20,10 +20,15 @@ class SettingsService extends ChangeNotifier {
   static const _kPlayAudio = 'play_audio';
   static const _kSaveHistory = 'save_history';
   static const _kEngine = 'engine';
+  static const _kWhisperModel = 'whisper_model';
 
   /// Motore di trascrizione: 'local' (whisper.cpp on-device) o 'groq' (cloud).
   static const String engineLocal = 'local';
   static const String engineGroq = 'groq';
+
+  /// Nome del modello whisper selezionato (vedi `WhisperModel`):
+  /// 'tiny', 'base', 'small', 'medium', 'large'.
+  static const String defaultWhisperModel = 'base';
 
   late SharedPreferences _prefs;
 
@@ -34,6 +39,7 @@ class SettingsService extends ChangeNotifier {
   bool _playAudio = true;
   bool _saveHistory = true;
   String _engine = engineLocal; // default: locale (offline, senza chiave)
+  String _whisperModel = defaultWhisperModel; // default: 'base'
 
   bool _loaded = false;
 
@@ -48,6 +54,7 @@ class SettingsService extends ChangeNotifier {
     _playAudio = _prefs.getBool(_kPlayAudio) ?? true;
     _saveHistory = _prefs.getBool(_kSaveHistory) ?? true;
     _engine = _prefs.getString(_kEngine) ?? engineLocal;
+    _whisperModel = _prefs.getString(_kWhisperModel) ?? defaultWhisperModel;
     _loaded = true;
     notifyListeners();
   }
@@ -59,6 +66,7 @@ class SettingsService extends ChangeNotifier {
   bool get playAudio => _playAudio;
   bool get saveHistory => _saveHistory;
   String get engine => _engine;
+  String get whisperModel => _whisperModel;
 
   bool get useLocal => _engine == engineLocal;
 
@@ -101,6 +109,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setEngine(String value) async {
     _engine = value;
     await _prefs.setString(_kEngine, value);
+    notifyListeners();
+  }
+
+  Future<void> setWhisperModel(String value) async {
+    _whisperModel = value;
+    await _prefs.setString(_kWhisperModel, value);
     notifyListeners();
   }
 }

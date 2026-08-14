@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "pt",
   "appTitle": "VoxToText",
   "navTranscribe": "Transcrever",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "A aguardar um ficheiro de áudio partilhado do WhatsApp ou Telegram...",
   "statusProcessing": "A processar nota de voz com Groq...",
 
+    "engineLabelLocal": "Local",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "A transcrever localmente no dispositivo...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "A transferir o modelo... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "Manter uma cópia de cada transcrição",
   "settingsSave": "Guardar",
   "settingsSaved": "Definições guardadas",
-  "settingsKeyEmpty": "A chave de API está vazia: a transcrição não funcionará."
+  "settingsKeyEmpty": "A chave de API está vazia: a transcrição não funcionará.",
+  "settingsSectionModel": "Modelo local",
+  "settingsModelSelectTitle": "Modelo Whisper",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "O menor e mais rápido (~39 milhões de parâmetros), ideal para dispositivos com recursos muito limitados, mas com menor precisão.",
+  "modelBaseDesc": "Cerca de 74 milhões de parâmetros, útil para testes rápidos ou tarefas simples.",
+  "modelSmallDesc": "Tamanho reduzido, bom compromisso para uso geral.",
+  "modelMediumDesc": "Alto desempenho, requer mais memória (RAM/VRAM).",
+  "modelLargeDesc": "O modelo principal com mais de 1,5 bilhão de parâmetros. Precisão máxima, lida com dialetos, ruído de fundo e traduções complexas.",
+  "settingsModelDownloadHint": "O modelo selecionado é baixado no primeiro uso."
 }

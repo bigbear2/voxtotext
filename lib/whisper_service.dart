@@ -4,13 +4,30 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:whisper_ggml/whisper_ggml.dart';
 
+/// Descrizione di un modello whisper selezionabile dall'utente.
+class WhisperModelInfo {
+  const WhisperModelInfo({required this.model, required this.sizeLabel});
+
+  /// Il modello whisper.cpp sottostante.
+  final WhisperModel model;
+
+  /// Etichetta dimensione mostrata nella UI (es. '~142 MB').
+  final String sizeLabel;
+
+  /// Identificatore usato come valore nei dropdown / prefs.
+  String get id => model.name;
+
+  /// Nome tecnico del file scaricato (es. 'ggml-base.bin').
+  String get fileName => 'ggml-${model.modelName}.bin';
+}
+
 /// Servizio per la trascrizione locale con whisper.cpp.
 ///
-/// Il modello GGML (default [WhisperModel.base], ~142 MB) viene scaricato a
-/// runtime la prima volta e salvato nella directory dei file di supporto
-/// dell'app; NON viene incluso nell'APK per non gonfiarlo.
+/// I modelli GGML vengono scaricati a runtime (la prima volta che servono) e
+/// salvati nella directory dei file di supporto dell'app; NON vengono inclusi
+/// nell'APK per non gonfiarlo.
 ///
-/// Usa [downloadModel] per scaricare il modello con progresso, e
+/// Usa [downloadModel] per scaricare un modello con progresso, e
 /// [transcribe] per trascrivere un file audio (FFmpeg integrato converte
 /// automaticamente `.opus` → wav 16 kHz mono).
 class WhisperService {
@@ -20,29 +37,49 @@ class WhisperService {
 
   final WhisperController _controller = WhisperController();
 
+  /// Modelli selezionabili dall'utente nelle Impostazioni.
+  static const List<WhisperModelInfo> models = [
+    WhisperModelInfo(model: WhisperModel.tiny, sizeLabel: '~75 MB'),
+    WhisperModelInfo(model: WhisperModel.base, sizeLabel: '~142 MB'),
+    WhisperModelInfo(model: WhisperModel.small, sizeLabel: '~466 MB'),
+    WhisperModelInfo(model: WhisperModel.medium, sizeLabel: '~1.5 GB'),
+    WhisperModelInfo(model: WhisperModel.large, sizeLabel: '~3.1 GB'),
+  ];
+
   /// Modello di default. `base` è il miglior compromesso qualità/velocità.
   WhisperModel get defaultModel => WhisperModel.base;
 
-  /// Se il modello è già presente su disco.
-  Future<bool> isModelDownloaded() async {
+  /// Trova le info di un modello, o quelle del [defaultModel] se assente.
+  WhisperModelInfo infoFor(WhisperModel model) {
+    for (final m in models) {
+      if (m.model == model) return m;
+    }
+    return models[1];
+  }
+
+  /// Se il [model] è già presente su disco.
+  Future<bool> isModelDownloaded([WhisperModel? model]) async {
+    final m = model ?? defaultModel;
     try {
-      final path = await _controller.getPath(defaultModel);
+      final path = await _controller.getPath(m);
       return File(path).existsSync();
     } catch (_) {
       return false;
     }
   }
 
-  /// Dimensione in MB del modello, per mostrarla nella UI.
-  String get modelSizeLabel => '~142 MB';
+  /// Etichetta dimensione del modello, per mostrarla nella UI.
+  String modelSizeLabel([WhisperModel? model]) =>
+      infoFor(model ?? defaultModel).sizeLabel;
 
-  /// Scarica il modello (se non presente) riportando il progresso 0-100.
+  /// Scarica [model] (se non presente) riportando il progresso 0-100.
   ///
   /// [onProgress] viene invocato con la percentuale (e i byte ricevuti).
-  Future<String> downloadModel({
+  Future<String> downloadModel(
+    WhisperModel model, {
     required void Function(int percent) onProgress,
   }) async {
-    final String destPath = await _controller.getPath(defaultModel);
+    final String destPath = await _controller.getPath(model);
     final File destFile = File(destPath);
 
     if (destFile.existsSync()) {
@@ -52,7 +89,7 @@ class WhisperService {
 
     await destFile.parent.create(recursive: true);
 
-    final request = http.Request('GET', defaultModel.modelUri);
+    final request = http.Request('GET', model.modelUri);
     final streamed = await request.send();
 
     if (streamed.statusCode != 200) {
@@ -82,19 +119,21 @@ class WhisperService {
     return destPath;
   }
 
-  /// Trascrive [audioPath] localmente.
+  /// Trascrive [audioPath] localmente con [model].
   ///
   /// [lang]: codice lingua ISO-639-1 (es. 'it'), oppure vuoto per il
   /// rilevamento automatico. Restituisce il testo trascritto, o null in
   /// caso di errore (che viene loggato).
   Future<String?> transcribe(
     String audioPath, {
+    WhisperModel? model,
     required String lang,
     void Function(int percent)? onProgress,
   }) async {
+    final m = model ?? defaultModel;
     try {
       final result = await _controller.transcribe(
-        model: defaultModel,
+        model: m,
         audioPath: audioPath,
         lang: lang,
         onProgress: onProgress,

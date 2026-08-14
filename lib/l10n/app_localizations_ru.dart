@@ -34,6 +34,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get statusProcessingLocal => 'Транскрибация локально на устройстве...';
 
   @override
+  String get engineLabelLocal => 'Локально';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'Загрузка модели... $percent%';
   }
@@ -144,6 +150,51 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'Модель загружена';
+
+  @override
+  String get settingsSectionModel => 'Локальная модель';
+
+  @override
+  String get settingsModelSelectTitle => 'Модель Whisper';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large';
+
+  @override
+  String get modelTinyDesc =>
+      'Самая маленькая и быстрая (~39 млн параметров), идеальна для устройств с очень ограниченными ресурсами, но ниже точность.';
+
+  @override
+  String get modelBaseDesc =>
+      'Около 74 млн параметров, подходит для быстрых тестов или простых задач.';
+
+  @override
+  String get modelSmallDesc =>
+      'Небольшой размер, хороший компромисс для общего использования.';
+
+  @override
+  String get modelMediumDesc =>
+      'Высокая производительность, требует больше памяти (RAM/VRAM).';
+
+  @override
+  String get modelLargeDesc =>
+      'Флагманская модель с более чем 1,5 млрд параметров. Максимальная точность, справляется с диалектами, шумом и сложными переводами.';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'Выбранная модель загружается при первом использовании.';
 
   @override
   String get settingsApiKeyTitle => 'API-ключ Groq';

@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
 import 'package:share_handler/share_handler.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:whisper_ggml/whisper_ggml.dart';
 import 'db_helper.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n_ext.dart';
@@ -183,6 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
   String _statusMessage = "";
   StreamSubscription? _intentSubscription;
 
+  // Timer per la durata della trascrizione
+  Timer? _transcribeTimer;
+  int _elapsedSeconds = 0;
+
   // Player Audio
   final AudioPlayer _audioPlayer = AudioPlayer();
   String? _currentAudioPath;
@@ -196,6 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _intentSubscription?.cancel();
+    _transcribeTimer?.cancel();
     _audioPlayer.dispose();
     super.dispose();
   }
@@ -251,6 +257,60 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _startTranscribeTimer() {
+    _transcribeTimer?.cancel();
+    setState(() => _elapsedSeconds = 0);
+    _transcribeTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!mounted) return;
+      setState(() => _elapsedSeconds++);
+    });
+  }
+
+  void _stopTranscribeTimer() {
+    _transcribeTimer?.cancel();
+    _transcribeTimer = null;
+  }
+
+  /// Formatta i secondi in mm:ss (es. 75 → '01:15').
+  String _formatElapsed(int seconds) {
+    final m = (seconds ~/ 60).toString().padLeft(2, '0');
+    final s = (seconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  /// Etichetta del motore attivo, es. 'Local: Large' o 'Groq'.
+  String _engineLabel(AppLocalizations l10n) {
+    if (SettingsService.instance.useLocal) {
+      final id = SettingsService.instance.whisperModel;
+      return '${l10n.engineLabelLocal}: ${_modelNameLabel(l10n, id)}';
+    }
+    return l10n.engineLabelGroq;
+  }
+
+  String _modelNameLabel(AppLocalizations l10n, String id) {
+    switch (id) {
+      case 'tiny':
+        return l10n.modelTinyLabel;
+      case 'small':
+        return l10n.modelSmallLabel;
+      case 'medium':
+        return l10n.modelMediumLabel;
+      case 'large':
+        return l10n.modelLargeLabel;
+      case 'base':
+      default:
+        return l10n.modelBaseLabel;
+    }
+  }
+
+  /// Formatta una durata in mm:ss.
+  String _formatDuration(Duration d) {
+    final total = d.inSeconds;
+    final m = (total ~/ 60).toString().padLeft(2, '0');
+    final s = (total % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
   Future<void> _processAudioFile(String rawPath) async {
     final l10n = context.l10n;
     await _audioPlayer.stop();
@@ -259,6 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _transcription = "";
       _statusMessage = l10n.statusProcessing;
     });
+    _startTranscribeTimer();
 
     try {
       String cleanPath = rawPath.startsWith("file://")
@@ -317,6 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _statusMessage = l10n.errorConversion(e.toString());
       });
     } finally {
+      _stopTranscribeTimer();
       setState(() {
         _isLoading = false;
       });
@@ -339,11 +401,14 @@ class _HomeScreenState extends State<HomeScreen> {
       _statusMessage = l10n.statusProcessingLocal;
     });
 
-    if (!await WhisperService.instance.isModelDownloaded()) {
+    final WhisperModel model = _selectedWhisperModel();
+
+    if (!await WhisperService.instance.isModelDownloaded(model)) {
       setState(() {
         _statusMessage = l10n.statusDownloadingModel(0);
       });
       await WhisperService.instance.downloadModel(
+        model,
         onProgress: (percent) {
           if (!mounted) return;
           setState(() => _statusMessage = l10n.statusDownloadingModel(percent));
@@ -353,6 +418,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final String? result = await WhisperService.instance.transcribe(
       path,
+      model: model,
       lang: lang,
       onProgress: (percent) {
         if (!mounted) return;
@@ -366,6 +432,16 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
     return result ?? '';
+  }
+
+  /// Mappa il modello selezionato nelle Impostazioni sul `WhisperModel`
+  /// corrispondente (default: base).
+  WhisperModel _selectedWhisperModel() {
+    final id = SettingsService.instance.whisperModel;
+    for (final m in WhisperService.models) {
+      if (m.id == id) return m.model;
+    }
+    return WhisperService.instance.defaultModel;
   }
 
   /// Trascrizione cloud con Groq (Endpoint OpenAI /audio/transcriptions).
@@ -523,15 +599,37 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 12),
 
             if (_isLoading)
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: CircularProgressIndicator(color: Colors.teal),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    const CircularProgressIndicator(color: Colors.teal),
+                    const SizedBox(height: 12),
+                    Text(
+                      _engineLabel(l10n),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      _formatElapsed(_elapsedSeconds),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        fontFeatures: const [FontFeature.tabularFigures()],
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
             // PLAYER AUDIO INTEGRATO
-            if (_currentAudioPath != null && !_isLoading) ...[
+            if (_currentAudioPath != null) ...[
               Card(
                 elevation: 1,
                 child: Padding(
@@ -593,20 +691,55 @@ class _HomeScreenState extends State<HomeScreen> {
                             final position = snapshot.data ?? Duration.zero;
                             final duration =
                                 _audioPlayer.duration ?? Duration.zero;
-                            return Slider(
-                              activeColor: Colors.teal,
-                              value: position.inMilliseconds.toDouble().clamp(
-                                0.0,
-                                duration.inMilliseconds.toDouble(),
-                              ),
-                              max: duration.inMilliseconds.toDouble() > 0
-                                  ? duration.inMilliseconds.toDouble()
-                                  : 1.0,
-                              onChanged: (val) {
-                                _audioPlayer.seek(
-                                  Duration(milliseconds: val.toInt()),
-                                );
-                              },
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        _formatDuration(position),
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Text(
+                                        _formatDuration(duration),
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: theme
+                                              .colorScheme
+                                              .onSurfaceVariant,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Slider(
+                                  activeColor: Colors.teal,
+                                  value: position.inMilliseconds
+                                      .toDouble()
+                                      .clamp(
+                                        0.0,
+                                        duration.inMilliseconds.toDouble(),
+                                      ),
+                                  max: duration.inMilliseconds.toDouble() > 0
+                                      ? duration.inMilliseconds.toDouble()
+                                      : 1.0,
+                                  onChanged: (val) {
+                                    _audioPlayer.seek(
+                                      Duration(milliseconds: val.toInt()),
+                                    );
+                                  },
+                                ),
+                              ],
                             );
                           },
                         ),

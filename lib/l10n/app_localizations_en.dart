@@ -34,6 +34,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statusProcessingLocal => 'Transcribing locally on the device...';
 
   @override
+  String get engineLabelLocal => 'Local';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'Downloading model... $percent%';
   }
@@ -144,6 +150,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'Model downloaded';
+
+  @override
+  String get settingsSectionModel => 'Local Model';
+
+  @override
+  String get settingsModelSelectTitle => 'Whisper model';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large (v3)';
+
+  @override
+  String get modelTinyDesc =>
+      'The smallest and fastest (~39M parameters), ideal for devices with very limited resources, but lower accuracy.';
+
+  @override
+  String get modelBaseDesc =>
+      'About 74M parameters, good for quick tests or simple tasks.';
+
+  @override
+  String get modelSmallDesc => 'Small size, a good compromise for general use.';
+
+  @override
+  String get modelMediumDesc =>
+      'High performance, requires more memory (RAM/VRAM).';
+
+  @override
+  String get modelLargeDesc =>
+      'The flagship model with over 1.5 billion parameters. Maximum accuracy, handles dialects, background noise and complex translations.';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'The selected model is downloaded on first use.';
 
   @override
   String get settingsApiKeyTitle => 'Groq API Key';

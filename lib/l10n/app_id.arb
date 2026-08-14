@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "id",
   "appTitle": "VoxToText",
   "navTranscribe": "Transkripsi",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "Menunggu file audio yang dibagikan dari WhatsApp atau Telegram...",
   "statusProcessing": "Memproses pesan suara dengan Groq...",
 
+    "engineLabelLocal": "Lokal",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "Mentranskripsi secara lokal di perangkat...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "Mengunduh model... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "Simpan salinan setiap transkripsi",
   "settingsSave": "Simpan",
   "settingsSaved": "Pengaturan disimpan",
-  "settingsKeyEmpty": "Kunci API kosong: transkripsi tidak akan berfungsi."
+  "settingsKeyEmpty": "Kunci API kosong: transkripsi tidak akan berfungsi.",
+  "settingsSectionModel": "Model Lokal",
+  "settingsModelSelectTitle": "Model Whisper",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "Paling kecil dan cepat (~39 juta parameter), ideal untuk perangkat dengan sumber daya sangat terbatas, tetapi akurasinya lebih rendah.",
+  "modelBaseDesc": "Sekitar 74 juta parameter, bagus untuk tes cepat atau tugas sederhana.",
+  "modelSmallDesc": "Ukuran kecil, kompromi yang baik untuk penggunaan umum.",
+  "modelMediumDesc": "Performa tinggi, membutuhkan lebih banyak memori (RAM/VRAM).",
+  "modelLargeDesc": "Model andalan dengan lebih dari 1,5 miliar parameter. Akurasi maksimal, menangani dialek, kebisingan latar, dan terjemahan kompleks.",
+  "settingsModelDownloadHint": "Model yang dipilih diunduh saat pertama kali digunakan."
 }

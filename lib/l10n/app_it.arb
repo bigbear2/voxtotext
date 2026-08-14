@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "it",
   "appTitle": "VoxToText",
   "navTranscribe": "Trascrivi",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "In attesa di un file audio condiviso da WhatsApp o Telegram...",
   "statusProcessing": "Elaborazione vocale in corso con Groq...",
 
+    "engineLabelLocal": "Locale",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "Trascrizione locale sul dispositivo...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "Download del modello in corso... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "Conserva una copia di ogni riepilogo trascritto",
   "settingsSave": "Salva",
   "settingsSaved": "Impostazioni salvate",
-  "settingsKeyEmpty": "La chiave API è vuota: la trascrizione non funzionerà."
+  "settingsKeyEmpty": "La chiave API è vuota: la trascrizione non funzionerà.",
+  "settingsSectionModel": "Modello locale",
+  "settingsModelSelectTitle": "Modello Whisper",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "Il più piccolo e veloce (~39 milioni di parametri), ideale per dispositivi con risorse molto limitate, ma con precisione inferiore.",
+  "modelBaseDesc": "Circa 74 milioni di parametri, utile per test rapidi o compiti semplici.",
+  "modelSmallDesc": "Dimensioni ridotte, buon compromesso per usi generali.",
+  "modelMediumDesc": "Prestazioni elevate, richiede più memoria (RAM/VRAM).",
+  "modelLargeDesc": "Il modello di punta con oltre 1,5 miliardi di parametri. Massima precisione, gestisce dialetti, rumori di fondo e traduzioni complesse.",
+  "settingsModelDownloadHint": "Il modello selezionato viene scaricato al primo utilizzo."
 }

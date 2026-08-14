@@ -36,6 +36,12 @@ class AppLocalizationsHi extends AppLocalizations {
       'डिवाइस पर स्थानीय रूप से ट्रांसक्राइब हो रहा है...';
 
   @override
+  String get engineLabelLocal => 'स्थानीय';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'मॉडल डाउनलोड हो रहा है... $percent%';
   }
@@ -146,6 +152,50 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'मॉडल डाउनलोड हो गया';
+
+  @override
+  String get settingsSectionModel => 'स्थानीय मॉडल';
+
+  @override
+  String get settingsModelSelectTitle => 'Whisper मॉडल';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large';
+
+  @override
+  String get modelTinyDesc =>
+      'सबसे छोटा और तेज़ (~39 मिलियन पैरामीटर), बहुत सीमित संसाधनों वाले उपकरणों के लिए आदर्श, लेकिन सटीकता कम।';
+
+  @override
+  String get modelBaseDesc =>
+      'लगभग 74 मिलियन पैरामीटर, त्वरित परीक्षण या सरल कार्यों के लिए उपयोगी।';
+
+  @override
+  String get modelSmallDesc => 'छोटा आकार, सामान्य उपयोग के लिए अच्छा समझौता।';
+
+  @override
+  String get modelMediumDesc =>
+      'उच्च प्रदर्शन, अधिक मेमोरी (RAM/VRAM) की आवश्यकता है।';
+
+  @override
+  String get modelLargeDesc =>
+      '1.5 अरब से अधिक पैरामीटर वाला प्रमुख मॉडल। अधिकतम सटीकता, बोलियों, पृष्ठभूमि शोर और जटिल अनुवादों को संभालता है।';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'चयनित मॉडल पहले उपयोग पर डाउनलोड किया जाता है।';
 
   @override
   String get settingsApiKeyTitle => 'Groq API कुंजी';

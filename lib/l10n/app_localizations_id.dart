@@ -35,6 +35,12 @@ class AppLocalizationsId extends AppLocalizations {
       'Mentranskripsi secara lokal di perangkat...';
 
   @override
+  String get engineLabelLocal => 'Lokal';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'Mengunduh model... $percent%';
   }
@@ -146,6 +152,51 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'Model terunduh';
+
+  @override
+  String get settingsSectionModel => 'Model Lokal';
+
+  @override
+  String get settingsModelSelectTitle => 'Model Whisper';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large';
+
+  @override
+  String get modelTinyDesc =>
+      'Paling kecil dan cepat (~39 juta parameter), ideal untuk perangkat dengan sumber daya sangat terbatas, tetapi akurasinya lebih rendah.';
+
+  @override
+  String get modelBaseDesc =>
+      'Sekitar 74 juta parameter, bagus untuk tes cepat atau tugas sederhana.';
+
+  @override
+  String get modelSmallDesc =>
+      'Ukuran kecil, kompromi yang baik untuk penggunaan umum.';
+
+  @override
+  String get modelMediumDesc =>
+      'Performa tinggi, membutuhkan lebih banyak memori (RAM/VRAM).';
+
+  @override
+  String get modelLargeDesc =>
+      'Model andalan dengan lebih dari 1,5 miliar parameter. Akurasi maksimal, menangani dialek, kebisingan latar, dan terjemahan kompleks.';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'Model yang dipilih diunduh saat pertama kali digunakan.';
 
   @override
   String get settingsApiKeyTitle => 'Kunci API Groq';

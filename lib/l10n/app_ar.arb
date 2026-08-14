@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ar",
   "appTitle": "VoxToText",
   "navTranscribe": "نسخ",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "في انتظار ملف صوتي تمت مشاركته من واتساب أو تيليجرام...",
   "statusProcessing": "جارٍ معالجة رسالة صوتية مع Groq...",
 
+    "engineLabelLocal": "محلي",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "جارٍ النسخ محليًا على الجهاز...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "جارٍ تنزيل النموذج... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "الاحتفاظ بنسخة من كل نص منسوخ",
   "settingsSave": "حفظ",
   "settingsSaved": "تم حفظ الإعدادات",
-  "settingsKeyEmpty": "مفتاح API فارغ: لن يعمل النسخ."
+  "settingsKeyEmpty": "مفتاح API فارغ: لن يعمل النسخ.",
+  "settingsSectionModel": "النموذج المحلي",
+  "settingsModelSelectTitle": "نموذج Whisper",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "الأصغر والأسرع (~39 مليون معلمة)، مثالي للأجهزة ذات الموارد المحدودة جدًا، لكن الدقة أقل.",
+  "modelBaseDesc": "حوالي 74 مليون معلمة، مناسب للاختبارات السريعة أو المهام البسيطة.",
+  "modelSmallDesc": "حجم صغير، حل وسط جيد للاستخدام العام.",
+  "modelMediumDesc": "أداء عالٍ، يتطلب ذاكرة أكبر (RAM/VRAM).",
+  "modelLargeDesc": "النموذج الرائد بأكثر من 1.5 مليار معلمة. أقصى دقة، يتعامل مع اللهجات والضوضاء والترجمات المعقدة.",
+  "settingsModelDownloadHint": "يتم تنزيل النموذج المحدد عند أول استخدام."
 }

@@ -35,6 +35,12 @@ class AppLocalizationsPt extends AppLocalizations {
       'A transcrever localmente no dispositivo...';
 
   @override
+  String get engineLabelLocal => 'Local';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'A transferir o modelo... $percent%';
   }
@@ -147,6 +153,51 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'Modelo transferido';
+
+  @override
+  String get settingsSectionModel => 'Modelo local';
+
+  @override
+  String get settingsModelSelectTitle => 'Modelo Whisper';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large';
+
+  @override
+  String get modelTinyDesc =>
+      'O menor e mais rápido (~39 milhões de parâmetros), ideal para dispositivos com recursos muito limitados, mas com menor precisão.';
+
+  @override
+  String get modelBaseDesc =>
+      'Cerca de 74 milhões de parâmetros, útil para testes rápidos ou tarefas simples.';
+
+  @override
+  String get modelSmallDesc =>
+      'Tamanho reduzido, bom compromisso para uso geral.';
+
+  @override
+  String get modelMediumDesc =>
+      'Alto desempenho, requer mais memória (RAM/VRAM).';
+
+  @override
+  String get modelLargeDesc =>
+      'O modelo principal com mais de 1,5 bilhão de parâmetros. Precisão máxima, lida com dialetos, ruído de fundo e traduções complexas.';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'O modelo selecionado é baixado no primeiro uso.';
 
   @override
   String get settingsApiKeyTitle => 'Chave de API Groq';

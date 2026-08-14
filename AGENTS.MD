@@ -25,6 +25,16 @@ This document serves as the persistent contextual memory for AI agents (Gemini, 
 3. **Incoming Data Flow**:
    `WhatsApp Share` ➔ `Intent Filter (share_handler)` ➔ `Temp File Resolution (.opus)` ➔ `Audio Engine (just_audio / ExoPlayer)` ➔ `STT Engine`.
 
+4. **STT Engines (2, selectable in Settings default = Local)**:
+   - **Local (on-device, default)**: `whisper_ggml` 2.6.0 + bundled `ffmpeg_kit_flutter_new_min` (converts `.opus` → 16kHz mono wav). Model downloaded at runtime from HuggingFace (NOT in APK): default `WhisperModel.base` ≈ 142 MB, `modelUri` = `https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin`. Entry: `WhisperService` (`lib/whisper_service.dart`).
+     - **Key APIs**: `downloadModel()` has NO progress callback → WhisperService implements a custom streaming HTTP download to surface progress. `TranscribeResult` is NOT exported → use `final result`, don't type it. `lang: 'auto'` must be passed as empty string `''`. Requires Android NDK 29 (`ndkVersion = "29.0.13113456"` — others use 26, that's fine, 29 is backward compatible).
+   - **Groq (cloud)**: HTTP multipart to `https://api.groq.com/openai/v1/audio/transcriptions`, model `whisper-large-v3`, Bearer key from Settings. Marks the app `NonFreeNet` on F-DROID.
+   - Language map for whisper: `langCode` in `main.dart` (`_whisperLangCode`), `auto` → `''`.
+
+5. **F-DROID Metadata** (submission via GitLab `fdroid/fdroiddata`, NOT GitHub):
+   - Correct `metadata/com.bigbear2.voxtotext.yml` uses commit hash `46947aa...` (v1.0.0), no inline comments, `$$flutter$$/bin/flutter pub get` (not `flutter packages pub get`), build: `flutter build apk --release`.
+   - MR opened: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/45578 (needs a GitLab API token to update — user revoked the last one).
+
 ---
 
 ## 🛠️ Environment Rules for AI Agents

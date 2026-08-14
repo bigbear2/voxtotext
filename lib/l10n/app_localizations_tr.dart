@@ -35,6 +35,12 @@ class AppLocalizationsTr extends AppLocalizations {
       'Cihazda yerel olarak yazıya dökülüyor...';
 
   @override
+  String get engineLabelLocal => 'Yerel';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'Model indiriliyor... $percent%';
   }
@@ -145,6 +151,51 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'Model indirildi';
+
+  @override
+  String get settingsSectionModel => 'Yerel Model';
+
+  @override
+  String get settingsModelSelectTitle => 'Whisper Modeli';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large';
+
+  @override
+  String get modelTinyDesc =>
+      'En küçük ve en hızlı (~39 milyon parametre), çok sınırlı kaynaklara sahip cihazlar için idealdir, ancak doğruluk daha düşüktür.';
+
+  @override
+  String get modelBaseDesc =>
+      'Yaklaşık 74 milyon parametre, hızlı testler veya basit görevler için uygundur.';
+
+  @override
+  String get modelSmallDesc =>
+      'Küçük boyut, genel kullanım için iyi bir denge.';
+
+  @override
+  String get modelMediumDesc =>
+      'Yüksek performans, daha fazla bellek (RAM/VRAM) gerektirir.';
+
+  @override
+  String get modelLargeDesc =>
+      '1,5 milyardan fazla parametreye sahip amiral gemisi modeli. Maksimum doğruluk, lehçeleri, arka plan gürültüsünü ve karmaşık çevirileri yönetir.';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'Seçilen model ilk kullanımda indirilir.';
 
   @override
   String get settingsApiKeyTitle => 'Groq API Anahtarı';

@@ -34,6 +34,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get statusProcessingLocal => 'جارٍ النسخ محليًا على الجهاز...';
 
   @override
+  String get engineLabelLocal => 'محلي';
+
+  @override
+  String get engineLabelGroq => 'Groq';
+
+  @override
   String statusDownloadingModel(int percent) {
     return 'جارٍ تنزيل النموذج... $percent%';
   }
@@ -144,6 +150,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsModelDownloadedOk => 'تم تنزيل النموذج';
+
+  @override
+  String get settingsSectionModel => 'النموذج المحلي';
+
+  @override
+  String get settingsModelSelectTitle => 'نموذج Whisper';
+
+  @override
+  String get modelTinyLabel => 'Tiny';
+
+  @override
+  String get modelBaseLabel => 'Base';
+
+  @override
+  String get modelSmallLabel => 'Small';
+
+  @override
+  String get modelMediumLabel => 'Medium';
+
+  @override
+  String get modelLargeLabel => 'Large';
+
+  @override
+  String get modelTinyDesc =>
+      'الأصغر والأسرع (~39 مليون معلمة)، مثالي للأجهزة ذات الموارد المحدودة جدًا، لكن الدقة أقل.';
+
+  @override
+  String get modelBaseDesc =>
+      'حوالي 74 مليون معلمة، مناسب للاختبارات السريعة أو المهام البسيطة.';
+
+  @override
+  String get modelSmallDesc => 'حجم صغير، حل وسط جيد للاستخدام العام.';
+
+  @override
+  String get modelMediumDesc => 'أداء عالٍ، يتطلب ذاكرة أكبر (RAM/VRAM).';
+
+  @override
+  String get modelLargeDesc =>
+      'النموذج الرائد بأكثر من 1.5 مليار معلمة. أقصى دقة، يتعامل مع اللهجات والضوضاء والترجمات المعقدة.';
+
+  @override
+  String get settingsModelDownloadHint =>
+      'يتم تنزيل النموذج المحدد عند أول استخدام.';
 
   @override
   String get settingsApiKeyTitle => 'مفتاح API لـ Groq';

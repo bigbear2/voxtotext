@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ru",
   "appTitle": "VoxToText",
   "navTranscribe": "Расшифровать",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "Ожидание аудиофайла, отправленного из WhatsApp или Telegram...",
   "statusProcessing": "Обработка голосового сообщения с Groq...",
 
+    "engineLabelLocal": "Локально",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "Транскрибация локально на устройстве...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "Загрузка модели... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "Сохранять копию каждого распознанного текста",
   "settingsSave": "Сохранить",
   "settingsSaved": "Настройки сохранены",
-  "settingsKeyEmpty": "API-ключ пуст: распознавание не будет работать."
+  "settingsKeyEmpty": "API-ключ пуст: распознавание не будет работать.",
+  "settingsSectionModel": "Локальная модель",
+  "settingsModelSelectTitle": "Модель Whisper",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "Самая маленькая и быстрая (~39 млн параметров), идеальна для устройств с очень ограниченными ресурсами, но ниже точность.",
+  "modelBaseDesc": "Около 74 млн параметров, подходит для быстрых тестов или простых задач.",
+  "modelSmallDesc": "Небольшой размер, хороший компромисс для общего использования.",
+  "modelMediumDesc": "Высокая производительность, требует больше памяти (RAM/VRAM).",
+  "modelLargeDesc": "Флагманская модель с более чем 1,5 млрд параметров. Максимальная точность, справляется с диалектами, шумом и сложными переводами.",
+  "settingsModelDownloadHint": "Выбранная модель загружается при первом использовании."
 }

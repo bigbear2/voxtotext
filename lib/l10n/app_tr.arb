@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "tr",
   "appTitle": "VoxToText",
   "navTranscribe": "Yazıya Dök",
@@ -8,6 +8,8 @@
   "homeStatusWaiting": "WhatsApp veya Telegram'dan paylaşılan bir ses dosyası bekleniyor...",
   "statusProcessing": "Groq ile sesli not işleniyor...",
 
+    "engineLabelLocal": "Yerel",
+  "engineLabelGroq": "Groq",
   "statusProcessingLocal": "Cihazda yerel olarak yazıya dökülüyor...",
   "@statusProcessingLocal": {"description": "Status shown while transcribing with the local whisper engine"},
   "statusDownloadingModel": "Model indiriliyor... {percent}%",
@@ -76,5 +78,18 @@
   "settingsSaveHistorySub": "Her dönüştürmenin bir kopyasını sakla",
   "settingsSave": "Kaydet",
   "settingsSaved": "Ayarlar kaydedildi",
-  "settingsKeyEmpty": "API anahtarı boş: dönüştürme çalışmayacak."
+  "settingsKeyEmpty": "API anahtarı boş: dönüştürme çalışmayacak.",
+  "settingsSectionModel": "Yerel Model",
+  "settingsModelSelectTitle": "Whisper Modeli",
+  "modelTinyLabel": "Tiny",
+  "modelBaseLabel": "Base",
+  "modelSmallLabel": "Small",
+  "modelMediumLabel": "Medium",
+  "modelLargeLabel": "Large",
+  "modelTinyDesc": "En küçük ve en hızlı (~39 milyon parametre), çok sınırlı kaynaklara sahip cihazlar için idealdir, ancak doğruluk daha düşüktür.",
+  "modelBaseDesc": "Yaklaşık 74 milyon parametre, hızlı testler veya basit görevler için uygundur.",
+  "modelSmallDesc": "Küçük boyut, genel kullanım için iyi bir denge.",
+  "modelMediumDesc": "Yüksek performans, daha fazla bellek (RAM/VRAM) gerektirir.",
+  "modelLargeDesc": "1,5 milyardan fazla parametreye sahip amiral gemisi modeli. Maksimum doğruluk, lehçeleri, arka plan gürültüsünü ve karmaşık çevirileri yönetir.",
+  "settingsModelDownloadHint": "Seçilen model ilk kullanımda indirilir."
 }

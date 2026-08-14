@@ -166,6 +166,18 @@ abstract class AppLocalizations {
   /// **'Transcribing locally on the device...'**
   String get statusProcessingLocal;
 
+  /// Short label for the local transcription engine
+  ///
+  /// In en, this message translates to:
+  /// **'Local'**
+  String get engineLabelLocal;
+
+  /// Short label for the Groq cloud engine
+  ///
+  /// In en, this message translates to:
+  /// **'Groq'**
+  String get engineLabelGroq;
+
   /// Status while downloading the local model
   ///
   /// In en, this message translates to:
@@ -357,6 +369,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Model downloaded'**
   String get settingsModelDownloadedOk;
+
+  /// Section header for the local whisper model settings
+  ///
+  /// In en, this message translates to:
+  /// **'Local Model'**
+  String get settingsSectionModel;
+
+  /// Label of the model dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Whisper model'**
+  String get settingsModelSelectTitle;
+
+  /// Whisper model option name
+  ///
+  /// In en, this message translates to:
+  /// **'Tiny'**
+  String get modelTinyLabel;
+
+  /// Whisper model option name
+  ///
+  /// In en, this message translates to:
+  /// **'Base'**
+  String get modelBaseLabel;
+
+  /// Whisper model option name
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get modelSmallLabel;
+
+  /// Whisper model option name
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get modelMediumLabel;
+
+  /// Whisper model option name
+  ///
+  /// In en, this message translates to:
+  /// **'Large (v3)'**
+  String get modelLargeLabel;
+
+  /// Description shown for the Tiny model
+  ///
+  /// In en, this message translates to:
+  /// **'The smallest and fastest (~39M parameters), ideal for devices with very limited resources, but lower accuracy.'**
+  String get modelTinyDesc;
+
+  /// Description shown for the Base model
+  ///
+  /// In en, this message translates to:
+  /// **'About 74M parameters, good for quick tests or simple tasks.'**
+  String get modelBaseDesc;
+
+  /// Description shown for the Small model
+  ///
+  /// In en, this message translates to:
+  /// **'Small size, a good compromise for general use.'**
+  String get modelSmallDesc;
+
+  /// Description shown for the Medium model
+  ///
+  /// In en, this message translates to:
+  /// **'High performance, requires more memory (RAM/VRAM).'**
+  String get modelMediumDesc;
+
+  /// Description shown for the Large model
+  ///
+  /// In en, this message translates to:
+  /// **'The flagship model with over 1.5 billion parameters. Maximum accuracy, handles dialects, background noise and complex translations.'**
+  String get modelLargeDesc;
+
+  /// Hint text about the local model download
+  ///
+  /// In en, this message translates to:
+  /// **'The selected model is downloaded on first use.'**
+  String get settingsModelDownloadHint;
 
   /// Label of the API key field
   ///
