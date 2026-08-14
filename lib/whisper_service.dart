@@ -75,6 +75,8 @@ class WhisperService {
   /// Scarica [model] (se non presente) riportando il progresso 0-100.
   ///
   /// [onProgress] viene invocato con la percentuale (e i byte ricevuti).
+  /// Cancella gli eventuali altri modelli già scaricati, così sul dispositivo
+  /// resta soltanto quello selezionato (per non occupare spazio inutilmente).
   Future<String> downloadModel(
     WhisperModel model, {
     required void Function(int percent) onProgress,
@@ -83,6 +85,9 @@ class WhisperService {
     final File destFile = File(destPath);
 
     if (destFile.existsSync()) {
+      // Il modello è già presente: cancella comunque gli altri per lasciare
+      // solo quello selezionato.
+      await _removeOtherModels(model);
       onProgress(100);
       return destPath;
     }
@@ -115,8 +120,28 @@ class WhisperService {
       await sink.close();
     }
 
+    // Download completato: elimina gli altri modelli per lasciarne solo uno.
+    await _removeOtherModels(model);
+
     onProgress(100);
     return destPath;
+  }
+
+  /// Elimina da disco tutti i modelli tranne [keep], se presenti.
+  Future<void> _removeOtherModels(WhisperModel keep) async {
+    for (final info in models) {
+      if (info.model == keep) continue;
+      try {
+        final path = await _controller.getPath(info.model);
+        final file = File(path);
+        if (file.existsSync()) {
+          await file.delete();
+          debugPrint('whisper: rimosso modello ${info.id}');
+        }
+      } catch (e) {
+        debugPrint('whisper: errore rimozione modello ${info.id}: $e');
+      }
+    }
   }
 
   /// Trascrive [audioPath] localmente con [model].

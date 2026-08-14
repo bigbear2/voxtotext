@@ -37,7 +37,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _refreshModelStatus() async {
-    final downloaded = await WhisperService.instance.isModelDownloaded();
+    final downloaded = await WhisperService.instance.isModelDownloaded(
+      _selectedModel,
+    );
     if (!mounted) return;
     setState(() => _modelDownloaded = downloaded);
   }
