@@ -31,7 +31,13 @@ This document serves as the persistent contextual memory for AI agents (Gemini, 
    - **Groq (cloud)**: HTTP multipart to `https://api.groq.com/openai/v1/audio/transcriptions`, model `whisper-large-v3`, Bearer key from Settings. Marks the app `NonFreeNet` on F-DROID.
    - Language map for whisper: `langCode` in `main.dart` (`_whisperLangCode`), `auto` → `''`.
 
-5. **F-DROID Metadata** (submission via GitLab `fdroid/fdroiddata`, NOT GitHub):
+5. **PASSO 1 - Player + Timer UI** (commit `f46fbdf`):
+   - **Player sempre visibile** quando c'è un audio (`_currentAudioPath != null`), anche DURANTE la trascrizione (prima era `&& !_isLoading`, quindi spariva): ora si può mettere pausa mentre trascrive.
+   - Il player mostra **durata totale** del vocale: colonna con riga `posizione / durata` (formato mm:ss, `_formatDuration`) sopra lo slider.
+   - Sotto il `CircularProgressIndicator` (in `_isLoading`): **etichetta motore** (`_engineLabel` → `Local: <Modello>` o `Groq`) + **timer** mm:ss del tempo di trascrizione (`_elapsedSeconds`, `Timer.periodic` 1s gestito da `_startTranscribeTimer`/`_stopTranscribeTimer`, azzerato all'inizio e fermato nel `finally` di `_processAudioFile`).
+   - Nuove chiavi i18n `engineLabelLocal`/`engineLabelGroq` in tutte le 12 ARB. Helper modello: `_modelNameLabel` (tiny/base/small/medium/large → label i18n).
+
+6. **F-DROID Metadata** (submission via GitLab `fdroid/fdroiddata`, NOT GitHub):
    - Correct `metadata/com.bigbear2.voxtotext.yml` uses commit hash `46947aa...` (v1.0.0), no inline comments, `$$flutter$$/bin/flutter pub get` (not `flutter packages pub get`), build: `flutter build apk --release`.
    - MR opened: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/45578 (needs a GitLab API token to update — user revoked the last one).
 
