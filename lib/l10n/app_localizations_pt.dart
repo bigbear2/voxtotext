@@ -259,6 +259,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsSaveHistorySub => 'Manter uma cópia de cada transcrição';
 
   @override
+  String get settingsNotificationsTitle =>
+      'Mostrar notificações de transcrição';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Mostrar o texto transcrito em uma notificação ao terminar';
+
+  @override
   String get settingsSave => 'Guardar';
 
   @override

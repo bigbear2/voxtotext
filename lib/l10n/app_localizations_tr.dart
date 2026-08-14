@@ -256,6 +256,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsSaveHistorySub => 'Her dönüştürmenin bir kopyasını sakla';
 
   @override
+  String get settingsNotificationsTitle =>
+      'Transkripsiyon bildirimlerini göster';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Bittiğinde bildirimde transkripte edilmiş metni göster';
+
+  @override
   String get settingsSave => 'Kaydet';
 
   @override

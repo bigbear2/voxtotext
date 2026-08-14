@@ -37,7 +37,16 @@ This document serves as the persistent contextual memory for AI agents (Gemini, 
    - Sotto il `CircularProgressIndicator` (in `_isLoading`): **etichetta motore** (`_engineLabel` → `Local: <Modello>` o `Groq`) + **timer** mm:ss del tempo di trascrizione (`_elapsedSeconds`, `Timer.periodic` 1s gestito da `_startTranscribeTimer`/`_stopTranscribeTimer`, azzerato all'inizio e fermato nel `finally` di `_processAudioFile`).
    - Nuove chiavi i18n `engineLabelLocal`/`engineLabelGroq` in tutte le 12 ARB. Helper modello: `_modelNameLabel` (tiny/base/small/medium/large → label i18n).
 
-6. **F-DROID Metadata** (submission via GitLab `fdroid/fdroiddata`, NOT GitHub):
+6. **PASSO 2 - Fix condivisione con Settings aperta**:
+   - Bug: condividendo un vocale da WhatsApp mentre si è su Settings, l'app si riapriva ma la trascrizione avveniva "dietro" la route Settings (non visibile). Fix: `GlobalKey<NavigatorState> appNavigatorKey` (root `main.dart`) passato al `MaterialApp.navigatorKey`; `_popToRoot()` in `_initShareHandler` fa `navigator.popUntil((r) => r.isFirst)` sia sul media iniziale sia su `sharedMediaStream`, così si torna alla Home e si vede il player + caricamento.
+
+7. **PASSO 3 - Notifiche trascrizione** (`flutter_local_notifications ^17.2.4`):
+   - `lib/notification_service.dart`: `NotificationService.init()` (canale `transcription`, icona `@mipmap/ic_launcher`), `requestPermission()` (`POST_NOTIFICATIONS` Android 13+), `showTranscription(text)` → notifica con azione "Copy" (copia il testo tramite `_handleAction('copy')`). Tap sulla notifica riapre l'app.
+   - Chiamato da `main()` (init + requestPermission) e da `_processAudioFile` a fine trascrizione.
+   - Settings: chiave `notifications_enabled` (default on) in `SettingsService` + `setNotificationsEnabled()`; switch `settingsNotificationsTitle/Sub` in `_SettingsScreenState` sotto "Comportamento". Nuove chiavi i18n in tutte le 12 ARB.
+   - Android: `POST_NOTIFICATIONS` nel manifest, `isCoreLibraryDesugaringEnabled = true` + `coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")` in `app/build.gradle.kts`.
+
+8. **F-DROID Metadata** (submission via GitLab `fdroid/fdroiddata`, NOT GitHub):
    - Correct `metadata/com.bigbear2.voxtotext.yml` uses commit hash `46947aa...` (v1.0.0), no inline comments, `$$flutter$$/bin/flutter pub get` (not `flutter packages pub get`), build: `flutter build apk --release`.
    - MR opened: https://gitlab.com/fdroid/fdroiddata/-/merge_requests/45578 (needs a GitLab API token to update — user revoked the last one).
 

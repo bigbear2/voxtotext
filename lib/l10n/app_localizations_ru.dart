@@ -258,6 +258,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'Сохранять копию каждого распознанного текста';
 
   @override
+  String get settingsNotificationsTitle =>
+      'Показывать уведомления о транскрипции';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Показывать расшифрованный текст в уведомлении по завершении';
+
+  @override
   String get settingsSave => 'Сохранить';
 
   @override

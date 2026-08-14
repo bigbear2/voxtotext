@@ -562,6 +562,18 @@ abstract class AppLocalizations {
   /// **'Keep a copy of each transcription summary'**
   String get settingsSaveHistorySub;
 
+  /// Title of the notifications switch
+  ///
+  /// In en, this message translates to:
+  /// **'Show transcription notifications'**
+  String get settingsNotificationsTitle;
+
+  /// Subtitle of the notifications switch
+  ///
+  /// In en, this message translates to:
+  /// **'Show the transcribed text in a notification when done'**
+  String get settingsNotificationsSub;
+
   /// Button to save the API key
   ///
   /// In en, this message translates to:

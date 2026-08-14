@@ -14,14 +14,24 @@ import 'db_helper.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n_ext.dart';
 import 'languages.dart';
+import 'notification_service.dart';
 import 'settings_screen.dart';
 import 'settings_service.dart';
 import 'whisper_service.dart';
+
+/// Chiave globale del navigator dell'app.
+///
+/// Serve per chiudere le route sopra la Home (es. Settings) quando arriva una
+/// condivisione da un'altra app: così l'utente torna alla Home e vede la
+/// trascrizione avviarsi.
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsService.instance.load();
   await _configureAudioSession();
+  await NotificationService.instance.init();
+  await NotificationService.instance.requestPermission();
   runApp(const VoxToTextApp());
 }
 
@@ -87,6 +97,7 @@ class _VoxToTextAppState extends State<VoxToTextApp> {
     final themeModeValue = SettingsService.instance.themeMode;
     return MaterialApp(
       title: 'VoxToText',
+      navigatorKey: appNavigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
@@ -209,6 +220,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _initShareHandler() async {
     final handler = ShareHandlerPlatform.instance;
 
+    // Se arriva una condivisione mentre si è su una route sopra la Home
+    // (es. Settings), la chiudiamo così la trascrizione è visibile.
+    _popToRoot();
+
     final initialMedia = await handler.getInitialSharedMedia();
     if (initialMedia != null &&
         initialMedia.attachments != null &&
@@ -218,11 +233,20 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     _intentSubscription = handler.sharedMediaStream.listen((SharedMedia media) {
+      _popToRoot();
       if (media.attachments != null && media.attachments!.isNotEmpty) {
         final path = media.attachments!.first?.path;
         if (path != null) _processAudioFile(path);
       }
     });
+  }
+
+  /// Chiude eventuali route sopra la Home (es. Settings) tornando alla root.
+  void _popToRoot() {
+    final navigator = appNavigatorKey.currentState;
+    if (navigator != null && navigator.canPop()) {
+      navigator.popUntil((route) => route.isFirst);
+    }
   }
 
   void loadFromHistory(TranscriptionItem item) async {
@@ -357,6 +381,9 @@ class _HomeScreenState extends State<HomeScreen> {
         _transcription = text;
         _statusMessage = l10n.transcriptionCompleted;
       });
+
+      // Notifica col testo trascritto (se abilitata nelle Impostazioni)
+      await NotificationService.instance.showTranscription(text);
 
       // Salvataggio in SQLite (se abilitato nelle Impostazioni)
       if (SettingsService.instance.saveHistory) {

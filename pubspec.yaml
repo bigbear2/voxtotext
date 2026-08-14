@@ -26,6 +26,7 @@ dependencies:
   url_launcher: ^6.3.1
   audio_session: ^0.2.4
   whisper_ggml: ^2.6.0
+  flutter_local_notifications: ^17.2.4
 
 dev_dependencies:
   flutter_test:

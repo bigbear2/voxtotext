@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "Dönüştürülürken sesli notu dinle",
   "settingsSaveHistoryTitle": "Dönüştürmeleri geçmişe kaydet",
   "settingsSaveHistorySub": "Her dönüştürmenin bir kopyasını sakla",
+
+  "settingsNotificationsTitle": "Transkripsiyon bildirimlerini göster",
+  "settingsNotificationsSub": "Bittiğinde bildirimde transkripte edilmiş metni göster",
   "settingsSave": "Kaydet",
   "settingsSaved": "Ayarlar kaydedildi",
   "settingsKeyEmpty": "API anahtarı boş: dönüştürme çalışmayacak.",

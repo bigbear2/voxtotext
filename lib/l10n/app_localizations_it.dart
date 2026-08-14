@@ -259,6 +259,13 @@ class AppLocalizationsIt extends AppLocalizations {
       'Conserva una copia di ogni riepilogo trascritto';
 
   @override
+  String get settingsNotificationsTitle => 'Mostra notifiche trascrizione';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Mostra il testo trascritto in una notifica a fine trascrizione';
+
+  @override
   String get settingsSave => 'Salva';
 
   @override

@@ -236,6 +236,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 value: settings.saveHistory,
                 onChanged: settings.setSaveHistory,
               ),
+              SwitchListTile(
+                title: Text(l10n.settingsNotificationsTitle),
+                subtitle: Text(l10n.settingsNotificationsSub),
+                value: settings.notificationsEnabled,
+                onChanged: settings.setNotificationsEnabled,
+              ),
               const SizedBox(height: 24),
 
               // ── REPOSITORY (alla fine) ──

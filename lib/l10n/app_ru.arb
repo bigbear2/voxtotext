@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "Слушать голосовое сообщение во время распознавания",
   "settingsSaveHistoryTitle": "Сохранять распознавания в историю",
   "settingsSaveHistorySub": "Сохранять копию каждого распознанного текста",
+
+  "settingsNotificationsTitle": "Показывать уведомления о транскрипции",
+  "settingsNotificationsSub": "Показывать расшифрованный текст в уведомлении по завершении",
   "settingsSave": "Сохранить",
   "settingsSaved": "Настройки сохранены",
   "settingsKeyEmpty": "API-ключ пуст: распознавание не будет работать.",

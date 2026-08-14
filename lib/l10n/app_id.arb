@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "Dengarkan pesan suara saat ditranskripsi",
   "settingsSaveHistoryTitle": "Simpan transkripsi ke riwayat",
   "settingsSaveHistorySub": "Simpan salinan setiap transkripsi",
+
+  "settingsNotificationsTitle": "Tampilkan notifikasi transkripsi",
+  "settingsNotificationsSub": "Tampilkan teks transkripsi di notifikasi saat selesai",
   "settingsSave": "Simpan",
   "settingsSaved": "Pengaturan disimpan",
   "settingsKeyEmpty": "Kunci API kosong: transkripsi tidak akan berfungsi.",

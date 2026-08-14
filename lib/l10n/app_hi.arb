@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "ट्रांसक्राइब होते समय वॉइस नोट सुनें",
   "settingsSaveHistoryTitle": "ट्रांसक्रिप्शन इतिहास में सहेजें",
   "settingsSaveHistorySub": "प्रत्येक ट्रांसक्रिप्शन की एक प्रति रखें",
+
+  "settingsNotificationsTitle": "प्रतिलेखन सूचनाएं दिखाएं",
+  "settingsNotificationsSub": "पूरा होने पर सूचना में प्रतिलेखित पाठ दिखाएं",
   "settingsSave": "सहेजें",
   "settingsSaved": "सेटिंग्स सहेजी गईं",
   "settingsKeyEmpty": "API कुंजी खाली है: ट्रांसक्रिप्शन काम नहीं करेगा।",

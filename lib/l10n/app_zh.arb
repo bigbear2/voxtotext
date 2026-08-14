@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "转录时收听语音消息",
   "settingsSaveHistoryTitle": "将转录保存到历史记录",
   "settingsSaveHistorySub": "保留每次转录的副本",
+
+  "settingsNotificationsTitle": "显示转录通知",
+  "settingsNotificationsSub": "完成后在通知中显示转录文本",
   "settingsSave": "保存",
   "settingsSaved": "设置已保存",
   "settingsKeyEmpty": "API 密钥为空：转录将无法工作。",

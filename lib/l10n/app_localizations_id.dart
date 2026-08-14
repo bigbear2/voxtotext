@@ -257,6 +257,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsSaveHistorySub => 'Simpan salinan setiap transkripsi';
 
   @override
+  String get settingsNotificationsTitle => 'Tampilkan notifikasi transkripsi';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Tampilkan teks transkripsi di notifikasi saat selesai';
+
+  @override
   String get settingsSave => 'Simpan';
 
   @override

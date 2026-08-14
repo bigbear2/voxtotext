@@ -262,6 +262,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Eine Kopie jeder Transkription aufbewahren';
 
   @override
+  String get settingsNotificationsTitle =>
+      'Transkriptions- Benachrichtigungen anzeigen';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Den transkribierten Text nach Abschluss in einer Benachrichtigung anzeigen';
+
+  @override
   String get settingsSave => 'Speichern';
 
   @override

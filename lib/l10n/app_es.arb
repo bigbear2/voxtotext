@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "Escucha la nota de voz mientras se transcribe",
   "settingsSaveHistoryTitle": "Guardar transcripciones en el historial",
   "settingsSaveHistorySub": "Conserva una copia de cada transcripción",
+
+  "settingsNotificationsTitle": "Mostrar notificaciones de transcripción",
+  "settingsNotificationsSub": "Mostrar el texto transcrito en una notificación al finalizar",
   "settingsSave": "Guardar",
   "settingsSaved": "Configuración guardada",
   "settingsKeyEmpty": "La clave de API está vacía: la transcripción no funcionará.",

@@ -257,6 +257,13 @@ class AppLocalizationsHi extends AppLocalizations {
       'प्रत्येक ट्रांसक्रिप्शन की एक प्रति रखें';
 
   @override
+  String get settingsNotificationsTitle => 'प्रतिलेखन सूचनाएं दिखाएं';
+
+  @override
+  String get settingsNotificationsSub =>
+      'पूरा होने पर सूचना में प्रतिलेखित पाठ दिखाएं';
+
+  @override
   String get settingsSave => 'सहेजें';
 
   @override

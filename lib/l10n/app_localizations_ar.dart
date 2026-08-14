@@ -253,6 +253,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsSaveHistorySub => 'الاحتفاظ بنسخة من كل نص منسوخ';
 
   @override
+  String get settingsNotificationsTitle => 'إشعارات النسخ';
+
+  @override
+  String get settingsNotificationsSub =>
+      'عرض النص المنسوخ في إشعار عند الانتهاء';
+
+  @override
   String get settingsSave => 'حفظ';
 
   @override

@@ -75,6 +75,9 @@
   "settingsPlayAudioSub": "Sprachnachricht während der Transkription anhören",
   "settingsSaveHistoryTitle": "Transkriptionen im Verlauf speichern",
   "settingsSaveHistorySub": "Eine Kopie jeder Transkription aufbewahren",
+
+  "settingsNotificationsTitle": "Transkriptions- Benachrichtigungen anzeigen",
+  "settingsNotificationsSub": "Den transkribierten Text nach Abschluss in einer Benachrichtigung anzeigen",
   "settingsSave": "Speichern",
   "settingsSaved": "Einstellungen gespeichert",
   "settingsKeyEmpty": "Der API-Schlüssel ist leer: Die Transkription wird nicht funktionieren.",

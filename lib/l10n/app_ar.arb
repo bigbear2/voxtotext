@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "استمع إلى الرسالة الصوتية أثناء نسخها",
   "settingsSaveHistoryTitle": "حفظ النسخ في السجل",
   "settingsSaveHistorySub": "الاحتفاظ بنسخة من كل نص منسوخ",
+
+  "settingsNotificationsTitle": "إشعارات النسخ",
+  "settingsNotificationsSub": "عرض النص المنسوخ في إشعار عند الانتهاء",
   "settingsSave": "حفظ",
   "settingsSaved": "تم حفظ الإعدادات",
   "settingsKeyEmpty": "مفتاح API فارغ: لن يعمل النسخ.",

@@ -256,6 +256,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Keep a copy of each transcription summary';
 
   @override
+  String get settingsNotificationsTitle => 'Show transcription notifications';
+
+  @override
+  String get settingsNotificationsSub =>
+      'Show the transcribed text in a notification when done';
+
+  @override
   String get settingsSave => 'Save';
 
   @override

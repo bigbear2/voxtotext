@@ -247,6 +247,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsSaveHistorySub => '保留每次转录的副本';
 
   @override
+  String get settingsNotificationsTitle => '显示转录通知';
+
+  @override
+  String get settingsNotificationsSub => '完成后在通知中显示转录文本';
+
+  @override
   String get settingsSave => '保存';
 
   @override

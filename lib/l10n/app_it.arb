@@ -76,6 +76,9 @@
   "settingsPlayAudioSub": "Ascolta il messaggio vocale mentre viene trascritto",
   "settingsSaveHistoryTitle": "Salva le trascrizioni in cronologia",
   "settingsSaveHistorySub": "Conserva una copia di ogni riepilogo trascritto",
+
+  "settingsNotificationsTitle": "Mostra notifiche trascrizione",
+  "settingsNotificationsSub": "Mostra il testo trascritto in una notifica a fine trascrizione",
   "settingsSave": "Salva",
   "settingsSaved": "Impostazioni salvate",
   "settingsKeyEmpty": "La chiave API è vuota: la trascrizione non funzionerà.",
